@@ -2,4 +2,6 @@
     <string name="app_name">Keyper</string>
     <string name="menu_add_button">Ajouter</string>
     <string name="menu_disconnect_button">Se déconnecter</string>
+    <string name="menu_credits_button">À propos</string>
+    <string name="app_credits">Application créée par SELLÉ-FABRE Inc.\nTout droit réservé.</string>
 </resources>

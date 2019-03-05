@@ -11,4 +11,9 @@
         app:showAsAction="never"
         android:title="@string/menu_disconnect_button" />
 
+    <item
+        android:id="@+id/menu_credits"
+        app:showAsAction="never"
+        android:title="@string/menu_credits_button" />
+
 </menu>
