@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Keyper</string>
+    <string name="menu_add_button">Ajouter</string>
+    <string name="menu_disconnect_button">Se déconnecter</string>
 </resources>
