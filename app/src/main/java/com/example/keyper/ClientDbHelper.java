@@ -1,4 +1,4 @@
-package com.example.keyper;
+/*package com.example.keyper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -24,3 +24,4 @@ public class ClientDbHelper extends SQLiteOpenHelper {
 
     }
 }
+*/
