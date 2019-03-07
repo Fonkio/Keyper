@@ -4,4 +4,9 @@
     <string name="menu_disconnect_button">Se déconnecter</string>
     <string name="menu_credits_button">À propos</string>
     <string name="app_credits">Application créée par SELLÉ-FABRE Inc.\nTous droits réservés.</string>
+    <string name="signIn">Se connecter</string>
+    <string name="signUp">S\'inscrire</string>
+    <string name="loginTextField">Identifiant</string>
+    <string name="passwordTextField">Mot de passe</string>
+    <string name="toastDisconnect">Vous êtes bien déconnecté</string>
 </resources>
