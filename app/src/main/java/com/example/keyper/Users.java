@@ -14,16 +14,14 @@ public class Users {
     }
 
     public void createAdminAccount() {
-        SQLiteDatabase dbreadable = this.db.getReadableDatabase();
+        SQLiteDatabase dbwritable = this.db.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put("username", "admin");
         values.put("password", "$iutinfo");
-        dbreadable.insert("User", null, values);
+        dbwritable.insert("User", null, values);
 
-        int i = 0;
-
-        dbreadable.close();
+        dbwritable.close();
     }
 
     public boolean isSignedUp(String loggerUsername) {

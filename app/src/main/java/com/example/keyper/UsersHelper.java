@@ -10,7 +10,7 @@ public class UsersHelper extends SQLiteOpenHelper{
 
     public static final String CREATE_USER = "CREATE TABLE User (ID_User INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT);",
                                 DROP_USER = "DROP TABLE IF EXISTS User;",
-                                CREATE_PASSWORD = "CREATE TABLE Password (ID_Password INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, FOREIGN KEY (ID_User) REFERENCES User(ID_User));",
+                                CREATE_PASSWORD = "CREATE TABLE Password (ID_Password INTEGER PRIMARY KEY AUTOINCREMENT, content TEXT, ID_User INTEGER, FOREIGN KEY(ID_User) REFERENCES User(ID_User));",
                                 DROP_PASSWORD = "DROP TABLE IF EXISTS Password;";
 
 
