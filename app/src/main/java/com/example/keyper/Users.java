@@ -21,6 +21,8 @@ public class Users {
         values.put("password", "$iutinfo");
         dbreadable.insert("User", null, values);
 
+        int i = 0;
+
         dbreadable.close();
     }
 
