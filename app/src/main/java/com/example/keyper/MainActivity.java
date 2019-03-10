@@ -33,16 +33,13 @@ public class MainActivity extends AppCompatActivity {
         ListView l = (ListView) findViewById(R.id.passwordList);
 
         //Compte le nombre de password du user
-        //Integer nbPass = db.countPasswordUser(MainActivity.userLogID);
 
         //Création du tableau pour la liste
-        /*String[] s = new String[nbPass];
+        String[] s = db.tabPasswordUser(MainActivity.userLogID);
 
-        for (String content:s) {
-            content =
-        }*/
 
-        //Toast.makeText(MainActivity.this, i.toString() , Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(MainActivity.this, s.toString() , Toast.LENGTH_SHORT).show();
 
 
     }

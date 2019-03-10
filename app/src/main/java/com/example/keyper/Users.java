@@ -62,24 +62,25 @@ public class Users {
     }
 
     //Compte le nombre de mot de passe d'un utilisateur
-    /*public int tabPasswordUser(Integer idUser) {
+    public String[] tabPasswordUser(Integer idUser) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
 
         String[] col = {"*"};
         String[] select = {idUser.toString()};
         Cursor curs = dbreadable.query("Password", col, "ID_User=?", select, null,null, null);
-
-        String[] tab
+        String[] tabPass;
         if(curs.moveToFirst()) {
+            tabPass = new String[curs.getCount()];
+            int i =0;
             do {
-                String username = curs.getString(curs.getColumnIndexOrThrow("username"));
-                if (loggerUsername.equals(username)) {
-                    return true;
-                }
+                tabPass[i] = curs.getString(curs.getColumnIndexOrThrow("content"));
+                i++;
             } while (curs.moveToNext());
+        } else {
+            tabPass = new String[0];
         }
-        return curs.getCount();
-    }*/
+        return tabPass;
+    }
 
     public int getId(String userName) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
