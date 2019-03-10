@@ -13,6 +13,7 @@ public class Users {
         this.db = new UsersHelper(context);
     }
 
+    //Création compte administrateur
     public void createAdminAccount() {
         SQLiteDatabase dbwritable = this.db.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -24,6 +25,7 @@ public class Users {
         dbwritable.close();
     }
 
+    //Verif id dans la db
     public boolean isSignedUp(String loggerUsername) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
 
@@ -82,6 +84,7 @@ public class Users {
         return tabPass;
     }
 
+    //Donne l'id à partir du username
     public int getId(String userName) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
         String[] col = {"ID_User"};
@@ -89,5 +92,16 @@ public class Users {
         Cursor curs = dbreadable.query("User", col, "username=?", select, null,null, null);
         curs.moveToFirst();
         return curs.getInt(curs.getColumnIndexOrThrow("ID_User"));
+    }
+
+    public void addPassword(String pwd, int idUser){
+        SQLiteDatabase dbwritable = this.db.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("content", pwd);
+        values.put("ID_User", idUser);
+        dbwritable.insert("Password", null, values);
+
+        dbwritable.close();
     }
 }

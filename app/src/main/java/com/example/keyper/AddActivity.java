@@ -1,5 +1,6 @@
 package com.example.keyper;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class AddActivity extends AppCompatActivity {
+
+    private Users db = new Users(AddActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +47,14 @@ public class AddActivity extends AppCompatActivity {
             }
             generatedPasswordField.setText(this.generatePassword(nbChar));
         }
+    }
+
+    public void onClickButtonValidate(View v) {
+        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password);
+        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID);
+
+        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

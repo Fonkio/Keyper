@@ -7,13 +7,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private Users db = new Users(MainActivity.this);
-    private static int userLogID;
+    public static int userLogID;
 
     //Enregistre l'ID de l'utilisateur connecté
     public static void setUserLogID(int userLogID) {
@@ -37,10 +39,14 @@ public class MainActivity extends AppCompatActivity {
         //Création du tableau pour la liste
         String[] s = db.tabPasswordUser(MainActivity.userLogID);
 
-
-
-        Toast.makeText(MainActivity.this, s.toString() , Toast.LENGTH_SHORT).show();
-
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1 , s);
+        l.setAdapter(adapter);
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //CODE CLICK LIST
+            }
+        });
 
     }
 
