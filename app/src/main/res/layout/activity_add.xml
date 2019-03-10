@@ -55,6 +55,7 @@
             android:id="@+id/button_validate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="Valider" />
 
     </LinearLayout>

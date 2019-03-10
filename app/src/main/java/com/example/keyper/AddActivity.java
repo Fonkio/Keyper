@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class AddActivity extends AppCompatActivity {
@@ -30,7 +31,18 @@ public class AddActivity extends AppCompatActivity {
     public void onClickButtonOk(View v) {
         EditText charNumberField = (EditText)findViewById(R.id.char_number_passwd);
         EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password);
-        int nbChar = Integer.parseInt(charNumberField.getText().toString());
-        generatedPasswordField.setText(this.generatePassword(nbChar));
+        Button validate = (Button)findViewById(R.id.button_validate);
+
+        if(!charNumberField.getText().toString().equals("")) {
+            int nbChar = Integer.parseInt(charNumberField.getText().toString());
+
+            //Active le bouton valider si le mot de passe est > 0
+            if (nbChar > 0) {
+                validate.setEnabled(true);
+            } else {
+                validate.setEnabled(false);
+            }
+            generatedPasswordField.setText(this.generatePassword(nbChar));
+        }
     }
 }
