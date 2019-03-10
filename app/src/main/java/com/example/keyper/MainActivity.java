@@ -7,16 +7,53 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private Users db = new Users(MainActivity.this);
+    private static int userLogID;
+
+    //Enregistre l'ID de l'utilisateur connecté
+    public static void setUserLogID(int userLogID) {
+        MainActivity.userLogID = userLogID;
     }
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        //Affichage du layout
+        setContentView(R.layout.activity_main);
+
+        //Récuperation de la liste
+        ListView l = (ListView) findViewById(R.id.passwordList);
+
+        //Compte le nombre de password du user
+        //Integer nbPass = db.countPasswordUser(MainActivity.userLogID);
+
+        //Création du tableau pour la liste
+        /*String[] s = new String[nbPass];
+
+        for (String content:s) {
+            content =
+        }*/
+
+        //Toast.makeText(MainActivity.this, i.toString() , Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    public void addChangeActivity() {
+        Intent intent = new Intent(MainActivity.this, AddActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    //Création du menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = this.getMenuInflater();
@@ -24,11 +61,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //Traitement des évenements sur les items du menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                this.addChangeActivity();
                 return true;
             case R.id.menu_disconnect:
                 Toast.makeText(MainActivity.this, R.string.toastDisconnect, Toast.LENGTH_SHORT).show();
@@ -41,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Renvoie sur l'activité de login
     public void disconnectChangeActivity() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);

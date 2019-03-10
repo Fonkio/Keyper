@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Mauvais mot de passe !", Toast.LENGTH_SHORT).show();
         }
         else {
+            MainActivity.setUserLogID(db.getId(username));
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
