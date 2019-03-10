@@ -9,4 +9,6 @@
     <string name="loginTextField">Identifiant</string>
     <string name="passwordTextField">Mot de passe</string>
     <string name="toastDisconnect">Vous êtes bien déconnecté</string>
+    <string name="charNumber">Taille du mot de passe</string>
+    <string name="clickAddOk">onClickButtonOk</string>
 </resources>
