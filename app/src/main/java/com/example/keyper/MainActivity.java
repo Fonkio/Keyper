@@ -1,5 +1,8 @@
 package com.example.keyper;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //CODE CLICK LIST
+                String label = "List"+position;
+                String text = ((TextView)view).getText().toString();
+                Toast.makeText(MainActivity.this, R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText(label, text);
+                clipboard.setPrimaryClip(clip);
             }
         });
 

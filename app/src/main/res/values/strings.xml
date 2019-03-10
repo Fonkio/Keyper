@@ -11,4 +11,5 @@
     <string name="toastDisconnect">Vous êtes bien déconnecté</string>
     <string name="charNumber">Taille du mot de passe</string>
     <string name="clickAddOk">onClickButtonOk</string>
+    <string name="clipBoardCopy">Mot de passe a bien été copié dans le Presse-papiers</string>
 </resources>
