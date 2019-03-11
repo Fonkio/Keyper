@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 public class Users {
 
     private UsersHelper db;
@@ -64,24 +66,21 @@ public class Users {
     }
 
     //Compte le nombre de mot de passe d'un utilisateur
-    public String[] tabPasswordUser(Integer idUser) {
+    public ArrayList<Password> tabPasswordUser(Integer idUser) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
 
         String[] col = {"*"};
         String[] select = {idUser.toString()};
         Cursor curs = dbreadable.query("Password", col, "ID_User=?", select, null,null, null);
-        String[] tabPass;
+        ArrayList<Password> l = new ArrayList<>();
         if(curs.moveToFirst()) {
-            tabPass = new String[curs.getCount()];
             int i =0;
             do {
-                tabPass[i] = curs.getString(curs.getColumnIndexOrThrow("content"));
+                l.add(new Password(""+i,curs.getString(curs.getColumnIndexOrThrow("content")))) ;
                 i++;
             } while (curs.moveToNext());
-        } else {
-            tabPass = new String[0];
         }
-        return tabPass;
+        return l;
     }
 
     //Donne l'id à partir du username

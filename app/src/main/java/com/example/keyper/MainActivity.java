@@ -16,6 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private Users db = new Users(MainActivity.this);
@@ -41,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         //Compte le nombre de password du user
 
         //Création du tableau pour la liste
-        String[] s = db.tabPasswordUser(MainActivity.userLogID);
+        ArrayList tabPwd = db.tabPasswordUser(MainActivity.userLogID);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1 , s);
+        AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.activity_list_item , s);*/
         l.setAdapter(adapter);
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
