@@ -76,7 +76,7 @@ public class Users {
         if(curs.moveToFirst()) {
             int i =0;
             do {
-                l.add(new Password(curs.getString(curs.getColumnIndexOrThrow("title")),curs.getString(curs.getColumnIndexOrThrow("content")))) ;
+                l.add(new Password(curs.getString(curs.getColumnIndexOrThrow("title")),MainActivity.hidePassword(curs.getString(curs.getColumnIndexOrThrow("content")).length())));
                 i++;
             } while (curs.moveToNext());
         }
@@ -103,5 +103,19 @@ public class Users {
         dbwritable.insert("Password", null, values);
 
         dbwritable.close();
+    }
+
+    public String getPasswordFromTitle(String title) {
+        SQLiteDatabase dbreadable = this.db.getReadableDatabase();
+
+        String[] col = {"content"};
+        String[] select = {title};
+        Cursor curs = dbreadable.query("Password", col, "title=?", select, null,null, null);
+
+        if(curs.moveToFirst()) {
+            return curs.getString(curs.getColumnIndexOrThrow("content"));
+        }
+        curs.close();
+        return "Password not found !";
     }
 }

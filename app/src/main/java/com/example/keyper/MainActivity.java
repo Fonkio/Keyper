@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -110,5 +111,30 @@ public class MainActivity extends AppCompatActivity {
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, text);
         clipboard.setPrimaryClip(clip);
+    }
+
+    public void onClickVisibilityButton(View v) {
+        LinearLayout l = (LinearLayout) findViewById(R.id.passwd_item_layout);
+
+        TextView titleField = (TextView) l.getChildAt(0);
+        String title = titleField.getText().toString();
+
+        TextView passwdField = (TextView) l.getChildAt(1);
+        String passwd = passwdField.getText().toString();
+
+        if (passwd.charAt(0) == '•') {
+            String notHidden = this.db.getPasswordFromTitle(title);
+            passwdField.setText(notHidden);
+        } else {
+            passwdField.setText(MainActivity.hidePassword(passwd.length()));
+        }
+    }
+
+    public static String hidePassword(int length) {
+        String hiddenPassword = "";
+        for (int i = 0; i < length; i++) {
+            hiddenPassword += "•";
+        }
+        return hiddenPassword;
     }
 }
