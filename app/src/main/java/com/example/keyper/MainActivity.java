@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,12 +54,7 @@ public class MainActivity extends AppCompatActivity {
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String label = "List"+position;
-                String text = ((TextView)view).getText().toString();
-                Toast.makeText(MainActivity.this, R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText(label, text);
-                clipboard.setPrimaryClip(clip);
+
             }
         });
 
@@ -100,5 +97,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void onClickItemList(View v) {
+        LinearLayout l = (LinearLayout) v;
+        TextView r = (TextView)((LinearLayout)l.getChildAt(1)).getChildAt(1);
+        //((CheckBox)l.getChildAt(0)).setVisibility(View.VISIBLE);
+
+        String label = "List";
+        String text = r.getText().toString();
+        Toast.makeText(MainActivity.this, R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
     }
 }

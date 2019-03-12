@@ -76,7 +76,7 @@ public class Users {
         if(curs.moveToFirst()) {
             int i =0;
             do {
-                l.add(new Password(""+i,curs.getString(curs.getColumnIndexOrThrow("content")))) ;
+                l.add(new Password(curs.getString(curs.getColumnIndexOrThrow("title")),curs.getString(curs.getColumnIndexOrThrow("content")))) ;
                 i++;
             } while (curs.moveToNext());
         }
@@ -93,10 +93,11 @@ public class Users {
         return curs.getInt(curs.getColumnIndexOrThrow("ID_User"));
     }
 
-    public void addPassword(String pwd, int idUser){
+    public void addPassword(String pwd, int idUser, String title){
         SQLiteDatabase dbwritable = this.db.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put("title", title);
         values.put("content", pwd);
         values.put("ID_User", idUser);
         dbwritable.insert("Password", null, values);

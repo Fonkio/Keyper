@@ -29,6 +29,7 @@ public class AddActivity extends AppCompatActivity {
     private String generatePassword(int nbChar) {
         Generator gen = new Generator();
         return gen.createPassword(nbChar);
+
     }
 
     public void onClickButtonOk(View v) {
@@ -51,7 +52,8 @@ public class AddActivity extends AppCompatActivity {
 
     public void onClickButtonValidate(View v) {
         EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password);
-        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID);
+        EditText titleField = (EditText)findViewById(R.id.title_Password);
+        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID, titleField.getText().toString() );
 
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
         startActivity(intent);
