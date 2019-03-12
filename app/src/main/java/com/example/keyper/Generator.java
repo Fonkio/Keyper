@@ -16,7 +16,7 @@ class Generator {
     private int digitRdm;
 
     private final String SPECIALS = " !#$%&()*+,-./:;<=>?@[]^_{|}~";
-    private final int MAXSPECIALRDM = 30;
+    private final int MAXSPECIALRDM = 29;
     private int specialRdm;
 
     public Generator() {
