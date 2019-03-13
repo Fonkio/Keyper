@@ -1,11 +1,13 @@
 package com.example.keyper;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,10 +29,13 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         TextView tvLib = (TextView) convertView.findViewById(R.id.lib);
         TextView tvPwd = (TextView) convertView.findViewById(R.id.pwd);
 
-        LinearLayout l = (LinearLayout)convertView.findViewById(R.id.passwd_item_layout);
-        l.setOnLongClickListener(new View.OnLongClickListener() {
+        LinearLayout passwordItem = (LinearLayout) convertView.findViewById(R.id.passwd_item_layout);
+        final View finalConvertView = convertView;
+        passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
+                LinearLayout l = (LinearLayout)view;
+                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.lightGreen));
                 return false;
             }
         });

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Récuperation de la liste
-        ListView l = (ListView) findViewById(R.id.passwordList);
+        ListView passwordList = (ListView) findViewById(R.id.passwordList);
 
         //Compte le nombre de password du user
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
         /*ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.activity_list_item , s);*/
-        l.setAdapter(adapter);
+        passwordList.setAdapter(adapter);
     }
 
     //Création du menu

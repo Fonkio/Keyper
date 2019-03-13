@@ -37,11 +37,11 @@
         android:id="@+id/imageButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8"
+        android:layout_weight="10"
         android:background="@android:color/transparent"
         android:onClick="onClickVisibilityButton"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/eye_comp" />
+        app:srcCompat="@drawable/eye" />
 
 
 </LinearLayout>

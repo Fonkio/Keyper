@@ -5,8 +5,16 @@
     <item
         android:id="@+id/menu_delete"
         android:title=""
-        android:icon="@drawable/eye_comp"
-        app:showAsAction="always" />
+        android:icon="@drawable/delete"
+        app:showAsAction="always"
+        android:visible="true"/>
+
+    <item
+        android:id="@+id/menu_edit"
+        android:title=""
+        android:icon="@drawable/edit"
+        app:showAsAction="always"
+        android:visible="true"/>
 
     <item
         android:id="@+id/menu_disconnect"
