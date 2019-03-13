@@ -3,5 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="lightGreen">#9485C055</color>
+    <color name="paleBlue">#A8DDEB</color>
+    <color name="paleBlue2">#75CFEA</color>
+    <color name="lightBlue">#137BB8</color>
+    <color name="darkBlue">#105275</color>
 </resources>
