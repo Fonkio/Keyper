@@ -27,6 +27,17 @@ public class Users {
         dbwritable.close();
     }
 
+    public void createAccount(String username, String password) {
+        SQLiteDatabase dbwritable = this.db.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("username", username);
+        values.put("password", password);
+        dbwritable.insert("User", null, values);
+
+        dbwritable.close();
+    }
+
     //Verif id dans la db
     public boolean isSignedUp(String loggerUsername) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();

@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         String label = "List";
         String password = this.db.getPasswordFromId(rId);
-        //MODIFIER POUR ALLER LE CHERCHER DANS LA BDD
         Toast.makeText(MainActivity.this, R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(label, password);
@@ -148,4 +147,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return hiddenPassword;
     }
+
+
 }

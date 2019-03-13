@@ -13,4 +13,11 @@
     <string name="clickAddOk">onClickButtonOk</string>
     <string name="clipBoardCopy">Mot de passe a bien été copié dans le Presse-papiers</string>
     <string name="titleHint">Libellé</string>
+    <string name="passwordConfirmTextField">Confirmation du mot de passe</string>
+    <string name="validateButton">Valider</string>
+    <string name="cancelButton">Annuler</string>
+    <string name="passwordDoesntMatch">Les mots de passe ne correspondent pas.</string>
+    <string name="passwordMissing">Les champs mot de passe ne sont pas tous remplis</string>
+    <string name="loginMissing">Veuillez renseigner un identifiant</string>
+    <string name="loginAlreadyExist">Ce nom d\'utilisateur existe déjà</string>
 </resources>

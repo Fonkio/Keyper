@@ -40,7 +40,26 @@ public class LoginActivity extends AppCompatActivity {
             MainActivity.setUserLogID(db.getId(username));
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
-            finish();
+        }
+    }
+
+    public void onClickSignUp(View v) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==1) {
+            String valLog = data.getStringExtra("login");
+            String valPwd = data.getStringExtra("password");
+            Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
+
+            TextView login = (TextView)findViewById(R.id.loginUsername);
+            TextView password = (TextView)findViewById(R.id.loginPassword);
+            login.setText(valLog);
+            password.setText(valPwd);
         }
     }
 }
