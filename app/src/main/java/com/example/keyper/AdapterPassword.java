@@ -34,8 +34,8 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                LinearLayout l = (LinearLayout)view;
-                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.lightGreen));
+                LinearLayout l = (LinearLayout)view.getParent();
+                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.paleBlue));
                 return false;
             }
         });
