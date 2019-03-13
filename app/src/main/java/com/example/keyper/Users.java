@@ -76,7 +76,7 @@ public class Users {
         if(curs.moveToFirst()) {
             int i =0;
             do {
-                l.add(new Password(curs.getString(curs.getColumnIndexOrThrow("title")),MainActivity.hidePassword(curs.getString(curs.getColumnIndexOrThrow("content")).length())));
+                l.add(new Password(curs.getString(curs.getColumnIndexOrThrow("title")),MainActivity.hidePassword(curs.getString(curs.getColumnIndexOrThrow("content")).length()),curs.getInt(curs.getColumnIndexOrThrow("ID_Password"))));
                 i++;
             } while (curs.moveToNext());
         }
@@ -105,12 +105,12 @@ public class Users {
         dbwritable.close();
     }
 
-    public String getPasswordFromTitle(String title) {
+    public String getPasswordFromId(int id) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
 
         String[] col = {"content"};
-        String[] select = {title};
-        Cursor curs = dbreadable.query("Password", col, "title=?", select, null,null, null);
+        String[] select = {Integer.toString(id)};
+        Cursor curs = dbreadable.query("Password", col, "ID_Password=?", select, null,null, null);
 
         if(curs.moveToFirst()) {
             return curs.getString(curs.getColumnIndexOrThrow("content"));

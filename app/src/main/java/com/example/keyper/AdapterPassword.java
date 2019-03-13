@@ -4,14 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class AdapterPassword extends ArrayAdapter<Password> {
 
-    public AdapterPassword(Context context, ArrayList<Password> users) {
-        super(context, 0, users);
+    public AdapterPassword(Context context, ArrayList<Password> pwd) {
+        super(context, 0, pwd);
     }
 
     @Override
@@ -25,9 +26,19 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         // Lookup view for data population
         TextView tvLib = (TextView) convertView.findViewById(R.id.lib);
         TextView tvPwd = (TextView) convertView.findViewById(R.id.pwd);
+
+        LinearLayout l = (LinearLayout)convertView.findViewById(R.id.passwd_item_layout);
+        l.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+        });
+
         // Populate the data into the template view using the data object
         tvLib.setText(pwd.getLib());
         tvPwd.setText(pwd.getPwd());
+        tvPwd.setTag(pwd.getId());
         // Return the completed view to render on screen
         return convertView;
     }

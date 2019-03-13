@@ -7,15 +7,15 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/passwd_item_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:onClick="onClickItemList"
         android:orientation="vertical"
-        android:paddingLeft="10px"
-        android:onClick="onClickItemList">
+        android:paddingLeft="10px">
 
         <TextView
             android:id="@+id/lib"
@@ -34,13 +34,14 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/visibility_button"
-        android:layout_width="30dip"
-        android:layout_height="20dip"
-        android:layout_margin="8dp"
-        android:background="@drawable/eye"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        android:onClick="onClickVisibilityButton"/>
+        android:id="@+id/imageButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:background="@android:color/transparent"
+        android:onClick="onClickVisibilityButton"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/eye_comp" />
+
 
 </LinearLayout>
