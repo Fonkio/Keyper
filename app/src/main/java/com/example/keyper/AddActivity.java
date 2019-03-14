@@ -33,8 +33,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void onClickButtonOk(View v) {
-        EditText charNumberField = (EditText)findViewById(R.id.char_number_passwd);
-        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password);
+        EditText charNumberField = (EditText)findViewById(R.id.password_length_field);
+        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password_field);
         Button validate = (Button)findViewById(R.id.button_validate);
 
         if(!charNumberField.getText().toString().equals("")) {
@@ -51,8 +51,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void onClickButtonValidate(View v) {
-        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password);
-        EditText titleField = (EditText)findViewById(R.id.title_Password);
+        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password_field);
+        EditText titleField = (EditText)findViewById(R.id.password_title_field);
         this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID, titleField.getText().toString() );
 
         Intent intent = new Intent(AddActivity.this, MainActivity.class);

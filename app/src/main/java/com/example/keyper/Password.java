@@ -2,25 +2,25 @@ package com.example.keyper;
 
 public class Password {
 
-    private String lib;
-    private String pwd;
+    private String title;
+    private String content;
     private int id;
 
-    public String getLib() {
-        return lib;
+    public String getTitle() {
+        return title;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getContent() {
+        return content;
     }
 
     public int getId() {
         return id;
     }
 
-    public Password (String lib, String pwd, int id) {
-        this.lib = lib;
-        this.pwd = pwd;
+    public Password (String title, String content, int id) {
+        this.title = title;
+        this.content = content;
         this.id = id;
     }
 }

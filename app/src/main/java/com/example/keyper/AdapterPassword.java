@@ -28,54 +28,66 @@ public class AdapterPassword extends ArrayAdapter<Password> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Password pwd = getItem(position);
+        Password password = getItem(position);
+
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_list, parent, false);
         }
-        // Lookup view for data population
-        TextView tvLib = (TextView) convertView.findViewById(R.id.lib);
-        TextView tvPwd = (TextView) convertView.findViewById(R.id.pwd);
 
-        LinearLayout passwordItem = (LinearLayout) convertView.findViewById(R.id.passwd_item_layout);
         final View finalConvertView = convertView;
+
+        // Lookup view for data population
+        TextView passwordTitle = finalConvertView.findViewById(R.id.title);
+        TextView passwordContent = finalConvertView.findViewById(R.id.content);
+
+        LinearLayout passwordItem = finalConvertView.findViewById(R.id.passwd_item_layout);
         passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                setLongClick(true);
-                LinearLayout l = (LinearLayout)view.getParent();
 
-                ListView lv = (ListView) l.getParent();
+                AdapterPassword.setLongClick(true);
 
-                for (int i = 0; i <lv.getChildCount(); i++) {
-                    ((LinearLayout)lv.getChildAt(i)).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
+                LinearLayout passwordItem = (LinearLayout)view.getParent();
+
+                ListView passwordList = (ListView)passwordItem.getParent();
+
+                //Set all password item's background color to white
+                for (int i = 0; i < passwordList.getChildCount(); i++) {
+                    passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                 }
-
-                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
+                //Set selected password item's background color to blue
+                passwordItem.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
 
                 return false;
             }
         });
+
         passwordItem.setOnClickListener(new View.OnClickListener() {
+
             private Users db = new Users(getContext());
+
             @Override
             public void onClick(View view) {
-                if (isLongClick()) {
-                    setLongClick(false);
-                } else {
-                    LinearLayout pv = (LinearLayout) view.getParent(); //Le linearLayout
 
-                    ListView lv = (ListView) pv.getParent();
+                if (AdapterPassword.isLongClick()) {
+                    AdapterPassword.setLongClick(false);
+                }
+                else {
+                    LinearLayout passwordItem = (LinearLayout) view.getParent();
 
-                    for (int i = 0; i <lv.getChildCount(); i++) {
-                        ((LinearLayout)lv.getChildAt(i)).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
+                    ListView passwordList = (ListView) passwordItem.getParent();
+
+                    //Set all password item's background color to white
+                    for (int i = 0; i < passwordList.getChildCount(); i++) {
+                        passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                     }
 
-                    TextView r = (TextView) ((LinearLayout) pv.getChildAt(0)).getChildAt(1);
-                    int rId = (int) r.getTag();
+                    TextView passwordContent = (TextView)((LinearLayout)passwordItem.getChildAt(0)).getChildAt(1);
+                    int passwordContentId = (int)passwordContent.getTag();
 
                     String label = "List";
-                    String password = this.db.getPasswordFromId(rId);
+                    String password = this.db.getPasswordFromId(passwordContentId);
                     Toast.makeText(getContext(), R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
                     ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText(label, password);
@@ -85,9 +97,10 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         });
 
         // Populate the data into the template view using the data object
-        tvLib.setText(pwd.getLib());
-        tvPwd.setText(pwd.getPwd());
-        tvPwd.setTag(pwd.getId());
+        passwordTitle.setText(password.getTitle());
+        passwordContent.setText(password.getContent());
+        passwordContent.setTag(password.getId());
+
         // Return the completed view to render on screen
         return convertView;
     }

@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/title_Password"
+            android:id="@+id/password_title_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +34,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/char_number_passwd"
+                android:id="@+id/password_length_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -52,7 +52,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/generated_password"
+            android:id="@+id/generated_password_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

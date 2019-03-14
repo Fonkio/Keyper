@@ -7,14 +7,14 @@
         android:title=""
         android:icon="@drawable/delete"
         app:showAsAction="always"
-        android:visible="true"/>
+        android:visible="false"/>
 
     <item
         android:id="@+id/menu_edit"
         android:title=""
         android:icon="@drawable/edit"
         app:showAsAction="always"
-        android:visible="true"/>
+        android:visible="false"/>
 
     <item
         android:id="@+id/menu_disconnect"

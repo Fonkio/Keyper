@@ -17,14 +17,14 @@
         android:paddingLeft="10px">
 
         <TextView
-            android:id="@+id/lib"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/pwd"
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

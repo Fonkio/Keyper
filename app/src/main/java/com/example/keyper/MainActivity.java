@@ -143,5 +143,15 @@ public class MainActivity extends AppCompatActivity {
         return hiddenPassword;
     }
 
+    public int getSelectedId() {
+        ListView listPassword = (ListView)findViewById(R.id.passwordList);
+
+        for(int i = 0; i < listPassword.getChildCount(); i++) {
+            if(listPassword.getChildAt(i).getBackground().equals(R.color.selected)) {
+                return listPassword.getChildAt(i).getId();
+            }
+        }
+        return -1;
+    }
 
 }
