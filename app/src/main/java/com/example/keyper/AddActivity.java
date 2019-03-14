@@ -27,15 +27,16 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private String generatePassword(int nbChar) {
-        Generator gen = new Generator();
+        boolean specials = true;
+        Generator gen = new Generator(specials);
         return gen.createPassword(nbChar);
 
     }
 
     public void onClickButtonOk(View v) {
-        EditText charNumberField = (EditText)findViewById(R.id.password_length_field);
-        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password_field);
-        Button validate = (Button)findViewById(R.id.button_validate);
+        EditText charNumberField = findViewById(R.id.password_length_field);
+        EditText generatedPasswordField = findViewById(R.id.generated_password_field);
+        Button validate = findViewById(R.id.button_validate);
 
         if(!charNumberField.getText().toString().equals("")) {
             int nbChar = Integer.parseInt(charNumberField.getText().toString());
@@ -51,8 +52,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void onClickButtonValidate(View v) {
-        EditText generatedPasswordField = (EditText)findViewById(R.id.generated_password_field);
-        EditText titleField = (EditText)findViewById(R.id.password_title_field);
+        EditText generatedPasswordField = findViewById(R.id.generated_password_field);
+        EditText titleField = findViewById(R.id.password_title_field);
         this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID, titleField.getText().toString() );
 
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
