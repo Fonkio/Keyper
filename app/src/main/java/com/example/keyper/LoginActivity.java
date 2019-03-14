@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode==1) {
+        if(requestCode==1 && !(data == null)) {
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
             if(!valLog.equals(""))
