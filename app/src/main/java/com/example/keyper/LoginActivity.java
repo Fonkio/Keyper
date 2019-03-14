@@ -27,14 +27,16 @@ public class LoginActivity extends AppCompatActivity {
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();
 
-        if(username.equals("") || password.equals("")) {
-            Toast.makeText(LoginActivity.this, "Veuillez entrer votre nom de compte / mot de passe !", Toast.LENGTH_SHORT).show();
+        if(username.equals("")) {
+            usernameField.setError("Veuillez entrer votre identifiant!");
+        } else if (password.equals("")) {
+            passwordField.setError("Veuillez entrer votre mot de passe!");
         }
         else if(!db.isSignedUp(username)) {
-            Toast.makeText(LoginActivity.this, "Vous n'êtes pas inscrit !", Toast.LENGTH_SHORT).show();
+            usernameField.setError("Vous n'etes pas inscrit / mauvais identifiant!");
         }
         else if(!db.checkPassword(username, password)){
-            Toast.makeText(LoginActivity.this, "Mauvais mot de passe !", Toast.LENGTH_SHORT).show();
+            passwordField.setError("Mauvais mot de passe!");
         }
         else {
             MainActivity.setUserLogID(db.getId(username));

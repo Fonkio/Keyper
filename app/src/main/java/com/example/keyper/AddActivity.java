@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -17,6 +19,9 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
+        RadioButton specials = (RadioButton)specialsGroup.getChildAt(1);
+        specials.setChecked(true);
     }
 
     @Override
@@ -27,7 +32,12 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private String generatePassword(int nbChar) {
-        boolean specials = true;
+        boolean specials;
+        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
+        if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals("Oui"))
+            specials = true;
+        else
+            specials = false;
         Generator gen = new Generator(specials);
         return gen.createPassword(nbChar);
 
