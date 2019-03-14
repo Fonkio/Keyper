@@ -20,4 +20,5 @@
     <string name="passwordMissing">Les champs mot de passe ne sont pas tous remplis</string>
     <string name="loginMissing">Veuillez renseigner un identifiant</string>
     <string name="loginAlreadyExist">Ce nom d\'utilisateur existe déjà</string>
+    <string name="add_title">Ajouter un mot de passe</string>
 </resources>

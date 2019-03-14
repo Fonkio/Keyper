@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         if(requestCode==1) {
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
-            Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
+            if(!valLog.equals(""))
+                Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
 
             TextView login = (TextView)findViewById(R.id.loginUsername);
             TextView password = (TextView)findViewById(R.id.loginPassword);

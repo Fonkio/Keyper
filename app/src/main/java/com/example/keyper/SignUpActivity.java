@@ -30,7 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
         TextView pwd = (TextView) findViewById(R.id.signUpPwd);
         TextView pwdConfirm = (TextView) findViewById(R.id.signUpConfirmPwd);
         if(!login.getText().toString().equals("")) {
-            if(db.isSignedUp(login.getText().toString())) {
+            if(!db.isSignedUp(login.getText().toString())) {
                 if (!(pwd.getText().toString().equals("") || pwdConfirm.getText().toString().equals(""))) {
                     if (pwd.getText().toString().equals(pwdConfirm.getText().toString())) {
                         db.createAccount(login.getText().toString(), pwd.getText().toString());
