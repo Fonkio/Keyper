@@ -59,4 +59,10 @@ public class AddActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void onClickButtonCancel(View v) {
+        Intent intent = new Intent(AddActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

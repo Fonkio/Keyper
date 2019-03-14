@@ -50,6 +50,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/buttonSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickValidate"
+                android:text="@string/validateButton" />
+
+            <Button
                 android:id="@+id/buttonCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,13 +65,6 @@
                 android:onClick="onClickCancel"
                 android:text="@string/cancelButton" />
 
-            <Button
-                android:id="@+id/buttonSignIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onClickValidate"
-                android:text="@string/validateButton" />
         </LinearLayout>
     </LinearLayout>
 
