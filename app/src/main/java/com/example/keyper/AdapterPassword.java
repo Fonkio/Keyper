@@ -51,7 +51,7 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     ((LinearLayout)lv.getChildAt(i)).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                 }
 
-                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.paleBlue));
+                l.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
 
                 return false;
             }
@@ -64,6 +64,12 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     setLongClick(false);
                 } else {
                     LinearLayout pv = (LinearLayout) view.getParent(); //Le linearLayout
+
+                    ListView lv = (ListView) pv.getParent();
+
+                    for (int i = 0; i <lv.getChildCount(); i++) {
+                        ((LinearLayout)lv.getChildAt(i)).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
+                    }
 
                     TextView r = (TextView) ((LinearLayout) pv.getChildAt(0)).getChildAt(1);
                     int rId = (int) r.getTag();
