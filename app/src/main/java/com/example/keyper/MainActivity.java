@@ -51,15 +51,19 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AddActivity.class);
                 startActivity(intent);
             }
-        });
 
+        });
+        majList();
+
+    }
+
+    public void majList() {
         //Récuperation de la liste
         ListView passwordList = (ListView) findViewById(R.id.passwordList);
 
-        //Compte le nombre de password du user
-
         //Création du tableau pour la liste
         ArrayList tabPwd = db.tabPasswordUser(MainActivity.userLogID);
+
 
         AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
         /*ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.activity_list_item , s);*/
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_credits:
                 Toast.makeText(MainActivity.this, R.string.app_credits, Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -103,17 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickItemList(View v) {
-        LinearLayout pv = (LinearLayout)v.getParent(); //Le linearLayout
 
-        TextView r = (TextView)((LinearLayout)pv.getChildAt(0)).getChildAt(1);
-        int rId = (int)r.getTag();
-
-        String label = "List";
-        String password = this.db.getPasswordFromId(rId);
-        Toast.makeText(MainActivity.this, R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(label, password);
-        clipboard.setPrimaryClip(clip);
     }
 
     public void onClickVisibilityButton(View v) {
