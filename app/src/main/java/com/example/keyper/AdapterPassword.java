@@ -42,20 +42,23 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         TextView passwordContent = finalConvertView.findViewById(R.id.content);
 
         LinearLayout passwordItem = finalConvertView.findViewById(R.id.passwd_item_layout);
+        //Long Click
         passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
 
+                //Pour ne pas faire un click normal
                 AdapterPassword.setLongClick(true);
 
-                LinearLayout passwordItem = (LinearLayout)view.getParent();
+                LinearLayout passwordItem = (LinearLayout)view.getParent(); //Recuperation de l'élément de la liste cliqué
 
-                ListView passwordList = (ListView)passwordItem.getParent();
+                ListView passwordList = (ListView)passwordItem.getParent(); //Recuperation de la list complète
 
                 //Set all password item's background color to white
                 for (int i = 0; i < passwordList.getChildCount(); i++) {
                     passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                 }
+
                 //Set selected password item's background color to blue
                 passwordItem.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
 
@@ -63,29 +66,31 @@ public class AdapterPassword extends ArrayAdapter<Password> {
             }
         });
 
+        //Click
         passwordItem.setOnClickListener(new View.OnClickListener() {
 
-            private Users db = new Users(getContext());
+            private Users db = new Users(getContext()); //Base de données
 
             @Override
             public void onClick(View view) {
 
-                if (AdapterPassword.isLongClick()) {
+                if (AdapterPassword.isLongClick()) {//Si il y a eu un long clic
                     AdapterPassword.setLongClick(false);
-                }
+                }//Si il n'y a pas eu de long clic
                 else {
-                    LinearLayout passwordItem = (LinearLayout) view.getParent();
+                    LinearLayout passwordItem = (LinearLayout) view.getParent(); //Recup de l'item de la liste cliqué
 
-                    ListView passwordList = (ListView) passwordItem.getParent();
+                    ListView passwordList = (ListView) passwordItem.getParent(); //Recup de la liste complète
 
                     //Set all password item's background color to white
                     for (int i = 0; i < passwordList.getChildCount(); i++) {
                         passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                     }
 
-                    TextView passwordContent = (TextView)((LinearLayout)passwordItem.getChildAt(0)).getChildAt(1);
-                    int passwordContentId = (int)passwordContent.getTag();
+                    TextView passwordContent = (TextView)((LinearLayout)view).getChildAt(1); //Recuperation champ mot de passe
+                    int passwordContentId = (int)passwordContent.getTag(); //Recupération de l'id du mot de passe stocké dans le tag du champ
 
+                    //Ajout dans le presse-papiers
                     String label = "List";
                     String password = this.db.getPasswordFromId(passwordContentId);
                     Toast.makeText(getContext(), R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();

@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         //Affichage du layout
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        //Recupération du +
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        //Clic sur le +
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,10 +55,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        //Affichage de la liste
         majList();
 
     }
 
+    //Afficher la liste
     public void majList() {
         //Récuperation de la liste
         ListView passwordList = (ListView) findViewById(R.id.passwordList);
@@ -64,9 +69,10 @@ public class MainActivity extends AppCompatActivity {
         //Création du tableau pour la liste
         ArrayList tabPwd = db.tabPasswordUser(MainActivity.userLogID);
 
-
+        //Création de l'adapter personnalisé
         AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.activity_list_item , s);*/
+
+        //Ajout de l'adapter
         passwordList.setAdapter(adapter);
     }
 
@@ -84,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_disconnect:
                 Toast.makeText(MainActivity.this, R.string.toastDisconnect, Toast.LENGTH_SHORT).show();
+                //Retour sur l'écran de connexion
                 this.disconnectChangeActivity();
                 return true;
             case R.id.menu_credits:
@@ -99,16 +106,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public void addChangeActivity() {
-        Intent intent = new Intent(MainActivity.this, AddActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void onClickItemList(View v) {
-
     }
 
     public void onClickVisibilityButton(View v) {
@@ -127,14 +124,17 @@ public class MainActivity extends AppCompatActivity {
         //Et le mot de passe
         String passwd = passwdField.getText().toString();
 
-        if (passwd.charAt(0) == '•') {
+        if (passwd.charAt(0) == '•') { //Si le mot de passe est caché
+            //Affichage du mot de passe
             String notHidden = this.db.getPasswordFromId((int)passwdField.getTag());
             passwdField.setText(notHidden);
-        } else {
+        } else { //Si le mot de passe est visible
+            //Chacher le mot de passe
             passwdField.setText(MainActivity.hidePassword(passwd.length()));
         }
     }
 
+    //Cache le mot de passe
     public static String hidePassword(int length) {
         String hiddenPassword = "";
         for (int i = 0; i < length; i++) {
@@ -144,11 +144,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public int getSelectedId() {
-        ListView listPassword = (ListView)findViewById(R.id.passwordList);
-
+        //Recup de la liste
+        ListView listPassword = findViewById(R.id.passwordList);
+        //Parcours de la liste pour trouver un élément selectionné
         for(int i = 0; i < listPassword.getChildCount(); i++) {
-            if(listPassword.getChildAt(i).getBackground().equals(R.color.selected)) {
-                return listPassword.getChildAt(i).getId();
+            LinearLayout passwordItem = (LinearLayout)listPassword.getChildAt(i); //Récup de l'item
+            if(passwordItem.getBackground().equals(R.color.selected)) {
+                LinearLayout tvPassword = (LinearLayout) passwordItem.getChildAt(0);
+                TextView tvContent = (TextView) tvPassword.getChildAt(1);
+                return (int)tvContent.getTag();
             }
         }
         return -1;

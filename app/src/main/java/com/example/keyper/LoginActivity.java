@@ -21,44 +21,52 @@ public class LoginActivity extends AppCompatActivity {
         this.db.createAdminAccount();
     }
 
+    //Clic sur se connecter
     public void connectChangeActivity(View v) {
+        //Recuperation des TextFields
         EditText usernameField = (EditText)findViewById(R.id.loginUsername);
         EditText passwordField = (EditText)findViewById(R.id.loginPassword);
+        //Récupération des valeurs
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();
 
-        if(username.equals("")) {
-            usernameField.setError("Veuillez entrer votre identifiant!");
-        } else if (password.equals("")) {
-            passwordField.setError("Veuillez entrer votre mot de passe!");
+        if(username.equals("")) { //Si login vide
+            usernameField.setError(getString(R.string.loginMissing));
+        } else if (password.equals("")) { //Si mot de passe vide
+            passwordField.setError(getString(R.string.passwordMissing));
         }
-        else if(!db.isSignedUp(username)) {
-            usernameField.setError("Vous n'etes pas inscrit / mauvais identifiant!");
+        else if(!db.isSignedUp(username)) { //Si login introuvabe en db
+            usernameField.setError(getString(R.string.incorrectLogin));
         }
-        else if(!db.checkPassword(username, password)){
-            passwordField.setError("Mauvais mot de passe!");
+        else if(!db.checkPassword(username, password)){ //Si mauvais mot de passe
+            passwordField.setError(getString(R.string.incorrectPassword));
         }
-        else {
+        else { //Tout est bon, connexion
+            //Enregistrement de l'id de l'utilisateur
             MainActivity.setUserLogID(db.getId(username));
+            //Lancement du MainActivity
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
     }
 
+    //Clic sur s'inscrire
     public void onClickSignUp(View v) {
         Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivityForResult(intent,1);
+        startActivityForResult(intent,1); //Attente d'un résultat
     }
 
-    @Override
+    @Override //Retour d'une activité
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode==1 && !(data == null)) {
+
+        if(requestCode==1 && !(data == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
+            //Récuperation des valeurs passées
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
-            if(!valLog.equals(""))
-                Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
-
+            //Toast de confirmation
+            Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
+            //On remplis les champs avec l'id et le mdp du nouvel inscrit
             TextView login = (TextView)findViewById(R.id.loginUsername);
             TextView password = (TextView)findViewById(R.id.loginPassword);
             login.setText(valLog);
