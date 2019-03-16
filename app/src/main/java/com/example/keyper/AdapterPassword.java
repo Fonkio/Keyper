@@ -1,4 +1,5 @@
 package com.example.keyper;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -59,8 +60,13 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                 }
 
+
+
                 //Set selected password item's background color to blue
                 passwordItem.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
+
+                MainActivity.showMenuItem();
+
 
                 return false;
             }
@@ -86,6 +92,8 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     for (int i = 0; i < passwordList.getChildCount(); i++) {
                         passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                     }
+
+                    MainActivity.hideMenuItem();
 
                     TextView passwordContent = (TextView)((LinearLayout)view).getChildAt(1); //Recuperation champ mot de passe
                     int passwordContentId = (int)passwordContent.getTag(); //Recupération de l'id du mot de passe stocké dans le tag du champ

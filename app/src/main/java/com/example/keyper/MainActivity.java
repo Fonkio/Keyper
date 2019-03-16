@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private Users db = new Users(MainActivity.this);
+    private static Menu menu;
     public static int userLogID;
 
     //Enregistre l'ID de l'utilisateur connecté
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     //Création du menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MainActivity.menu = menu;
         MenuInflater inflater = this.getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
         return true;
@@ -156,6 +158,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return -1;
+    }
+
+    public static void showMenuItem () {
+        MainActivity.menu.getItem(0).setVisible(true);
+        MainActivity.menu.getItem(1).setVisible(true);
+    }
+
+    public static void hideMenuItem () {
+        MainActivity.menu.getItem(0).setVisible(false);
+        MainActivity.menu.getItem(1).setVisible(false);
+    }
+
+    public void clickBackground(View v) {
+
+        ListView passwordList = findViewById(R.id.passwordList); //Recup de la liste complète
+
+        for (int i = 0; i < passwordList.getChildCount(); i++) {
+            passwordList.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.white));
+        }
+
+        MainActivity.hideMenuItem();
     }
 
 }
