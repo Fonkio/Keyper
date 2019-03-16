@@ -130,10 +130,33 @@ public class Users {
         return "Password not found !";
     }
 
+    public String getTitleFromId(int id) {
+        SQLiteDatabase dbreadable = this.db.getReadableDatabase();
+
+        String[] col = {"title"};
+        String[] select = {Integer.toString(id)};
+        Cursor curs = dbreadable.query("Password", col, "ID_Password=?", select, null,null, null);
+
+        if(curs.moveToFirst()) {
+            return curs.getString(curs.getColumnIndexOrThrow("title"));
+        }
+        curs.close();
+        return "Title not found !";
+    }
+
     public void removePassword(Integer id) {
         SQLiteDatabase dbwritable = this.db.getWritableDatabase();
 
         String[] delete = {id.toString()};
         dbwritable.delete("Password", "ID_Password=?",delete);
+    }
+
+    public void modifyPassword(String content, String title, Integer id) {
+        SQLiteDatabase dbwritable = this.db.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("content", content);
+        cv.put("title", title);
+        String[] select = {id.toString()};
+        dbwritable.update("Password",cv,"ID_Password=?", select);
     }
 }

@@ -113,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, R.string.toastRemove, Toast.LENGTH_SHORT).show();
                 this.majList();
                 return true;
+            case R.id.menu_edit:
+                Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
+                intent.putExtra("id",this.getSelectedId());
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
