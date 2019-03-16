@@ -24,4 +24,5 @@
     <string name="incorrectLogin">Vous n\'etes pas inscrit / Mauvais identifiant.</string>
     <string name="incorrectPassword">Mot de passe incorrect.</string>
     <string name="add_title">Ajouter un mot de passe</string>
+    <string name="toastRemove">Le mot de passe a été supprimé.</string>
 </resources>

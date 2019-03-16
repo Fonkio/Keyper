@@ -4,6 +4,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -75,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Ajout de l'adapter
         passwordList.setAdapter(adapter);
+        for (int i = 0; i < passwordList.getChildCount(); i++) {
+            passwordList.getChildAt(i).setTag(new Boolean(false));
+        }
     }
 
     //Création du menu
@@ -97,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_credits:
                 Toast.makeText(MainActivity.this, R.string.app_credits, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_delete:
+                db.removePassword(this.getSelectedId());
+                Toast.makeText(MainActivity.this, R.string.toastRemove, Toast.LENGTH_SHORT).show();
+                this.majList();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -151,7 +166,10 @@ public class MainActivity extends AppCompatActivity {
         //Parcours de la liste pour trouver un élément selectionné
         for(int i = 0; i < listPassword.getChildCount(); i++) {
             LinearLayout passwordItem = (LinearLayout)listPassword.getChildAt(i); //Récup de l'item
-            if(passwordItem.getBackground().equals(R.color.selected)) {
+
+            Boolean sel = (Boolean) passwordItem.getTag();
+
+            if(sel) {
                 LinearLayout tvPassword = (LinearLayout) passwordItem.getChildAt(0);
                 TextView tvContent = (TextView) tvPassword.getChildAt(1);
                 return (int)tvContent.getTag();
@@ -176,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; i < passwordList.getChildCount(); i++) {
             passwordList.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.white));
+            passwordList.getChildAt(i).setTag(false);
         }
 
         MainActivity.hideMenuItem();

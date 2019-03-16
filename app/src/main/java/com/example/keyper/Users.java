@@ -129,4 +129,11 @@ public class Users {
         curs.close();
         return "Password not found !";
     }
+
+    public void removePassword(Integer id) {
+        SQLiteDatabase dbwritable = this.db.getWritableDatabase();
+
+        String[] delete = {id.toString()};
+        dbwritable.delete("Password", "ID_Password=?",delete);
+    }
 }

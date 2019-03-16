@@ -43,6 +43,8 @@ public class AdapterPassword extends ArrayAdapter<Password> {
         TextView passwordContent = finalConvertView.findViewById(R.id.content);
 
         LinearLayout passwordItem = finalConvertView.findViewById(R.id.passwd_item_layout);
+
+
         //Long Click
         passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -58,12 +60,15 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                 //Set all password item's background color to white
                 for (int i = 0; i < passwordList.getChildCount(); i++) {
                     passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
+                    passwordList.getChildAt(i).setTag(new Boolean(false));
                 }
 
 
 
                 //Set selected password item's background color to blue
                 passwordItem.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
+
+                passwordItem.setTag(new Boolean(true));
 
                 MainActivity.showMenuItem();
 
@@ -91,6 +96,7 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     //Set all password item's background color to white
                     for (int i = 0; i < passwordList.getChildCount(); i++) {
                         passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
+                        passwordList.getChildAt(i).setTag(new Boolean(false));
                     }
 
                     MainActivity.hideMenuItem();
