@@ -1,8 +1,10 @@
 package com.example.keyper;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -100,24 +102,42 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.menu_disconnect:
                 Toast.makeText(MainActivity.this, R.string.toastDisconnect, Toast.LENGTH_SHORT).show();
                 //Retour sur l'écran de connexion
                 this.disconnectChangeActivity();
                 return true;
+
             case R.id.menu_credits:
                 Toast.makeText(MainActivity.this, R.string.app_credits, Toast.LENGTH_SHORT).show();
                 return true;
+
             case R.id.menu_delete:
+
+                /*new AlertDialog.Builder(this)
+                        .setTitle("Suppression")
+                        .setMessage("Voulez vous vraiment supprimer ce mot de passe ?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(MainActivity.this, "Supprimé", Toast.LENGTH_SHORT).show();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();*/
+
                 db.removePassword(this.getSelectedId());
                 Toast.makeText(MainActivity.this, R.string.toastRemove, Toast.LENGTH_SHORT).show();
                 this.majList();
+                this.hideMenuItem();
                 return true;
+
             case R.id.menu_edit:
                 Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
                 intent.putExtra("id",this.getSelectedId());
                 startActivity(intent);
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
