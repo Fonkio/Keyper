@@ -24,13 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
     private Users db = new Users(MainActivity.this);
     private static Menu menu;
-    public static int userLogID;
+    public static int userID;
 
     //Enregistre l'ID de l'utilisateur connecté
-    public static void setUserLogID(int userLogID) {
-        MainActivity.userLogID = userLogID;
+    public static void setUserID(int userID) {
+        MainActivity.userID = userID;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AddActivity.class);
                 startActivity(intent);
             }
-
         });
 
         //Affichage de la liste
@@ -65,21 +63,19 @@ public class MainActivity extends AppCompatActivity {
             searchBar.addTextChangedListener(new TextWatcher() {
 
                 @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
                 @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                }
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
-                //Même code que le méthode "updateList" de MainAcitivity, mais impossible de l'utiliser dans une classe anonyme
+                //Même code que le méthode "updateList" de MainActivity, mais impossible de l'utiliser dans une classe anonyme
                 @Override
                 public void afterTextChanged(Editable editable) {
                     //Récuperation de la liste
                     ListView passwordListView = findViewById(R.id.passwordList);
 
                     //Création du tableau pour la liste
-                    ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, editable.toString());
+                    ArrayList passwordList = db.listPasswordUser(MainActivity.userID, editable.toString());
 
                     //Création de l'adapter personnalisé
                     AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);
@@ -103,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         ListView passwordListView = (ListView) findViewById(R.id.passwordList);
 
         //Création du tableau pour la liste
-        ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, search);
+        ArrayList passwordList = db.listPasswordUser(MainActivity.userID, search);
 
         //Création de l'adapter personnalisé
         AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);
@@ -162,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                 ListView passwordListView = (ListView) findViewById(R.id.passwordList);
 
                                 //Création du tableau pour la liste
-                                ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, search);
+                                ArrayList passwordList = db.listPasswordUser(MainActivity.userID, search);
 
                                 //Création de l'adapter personnalisé
                                 AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);

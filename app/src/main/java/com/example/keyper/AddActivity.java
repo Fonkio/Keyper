@@ -64,7 +64,7 @@ public class AddActivity extends AppCompatActivity {
     public void onClickButtonValidate(View v) {
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
         EditText titleField = findViewById(R.id.password_title_field);
-        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userLogID, titleField.getText().toString() );
+        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userID, titleField.getText().toString() );
 
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
         startActivity(intent);

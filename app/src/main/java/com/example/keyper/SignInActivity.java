@@ -42,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
         }
         else { //Tout est bon, connexion
             //Enregistrement de l'id de l'utilisateur
-            MainActivity.setUserLogID(db.getId(username));
+            MainActivity.setUserID(db.getId(username));
             //Lancement du MainActivity
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);

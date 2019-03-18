@@ -47,5 +47,4 @@
         android:scaleType="centerInside"
         app:srcCompat="@drawable/eye" />
 
-
 </LinearLayout>
