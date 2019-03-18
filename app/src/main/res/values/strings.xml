@@ -10,7 +10,7 @@
     <string name="disconnect_prompt">Vous êtes bien déconnecté</string>
     <string name="password_length">Taille du mot de passe</string>
     <string name="add_click_ok">onClickButtonOk</string>
-    <string name="clipboard_copy">Mot de passe a bien été copié dans le Presse-papiers</string>
+    <string name="clipboard_copy">Le Mot de passe a bien été copié dans le Presse-papiers</string>
     <string name="password_title_hint">Libellé</string>
     <string name="password_confirm_hint">Confirmation du mot de passe</string>
     <string name="validate_button">Valider</string>

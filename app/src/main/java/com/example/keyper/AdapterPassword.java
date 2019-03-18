@@ -103,12 +103,8 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     int passwordContentId = (int)passwordContent.getTag(); //Recupération de l'id du mot de passe stocké dans le tag du champ
 
                     //Ajout dans le presse-papiers
-                    String label = "List";
                     String password = this.db.getPasswordFromId(passwordContentId);
-                    Toast.makeText(getContext(), R.string.clipboard_copy, Toast.LENGTH_SHORT).show();
-                    ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText(label, password);
-                    clipboard.setPrimaryClip(clip);
+                    AdapterPassword.copyToClipboard(getContext(), password);
                 }
             }
         });
@@ -128,5 +124,13 @@ public class AdapterPassword extends ArrayAdapter<Password> {
 
     public static boolean isLongClick() {
         return longClick;
+    }
+
+    public static void copyToClipboard(Context context, String password) {
+        String label = "Password";
+        Toast.makeText(context, R.string.clipboard_copy, Toast.LENGTH_SHORT).show();
+        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, password);
+        clipboard.setPrimaryClip(clip);
     }
 }
