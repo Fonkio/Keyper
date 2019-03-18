@@ -27,4 +27,5 @@
     <string name="toastRemove">Le mot de passe a été supprimé.</string>
     <string name="regen">Régénérer</string>
     <string name="editPassword">Modifier le mot de passe</string>
+    <string name="search">Rechercher...</string>
 </resources>

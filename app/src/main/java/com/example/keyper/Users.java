@@ -77,12 +77,12 @@ public class Users {
     }
 
     //Compte le nombre de mot de passe d'un utilisateur
-    public ArrayList<Password> tabPasswordUser(Integer idUser) {
+    public ArrayList<Password> listPasswordUser(Integer idUser,String search) {
         SQLiteDatabase dbreadable = this.db.getReadableDatabase();
 
         String[] col = {"*"};
-        String[] select = {idUser.toString()};
-        Cursor curs = dbreadable.query("Password", col, "ID_User=?", select, null,null, null);
+        String[] select = {idUser.toString(), "%"+search+"%"};
+        Cursor curs = dbreadable.query("Password", col, "ID_User=? and title LIKE ?", select, null,null, null);
         ArrayList<Password> l = new ArrayList<>();
         if(curs.moveToFirst()) {
             int i =0;

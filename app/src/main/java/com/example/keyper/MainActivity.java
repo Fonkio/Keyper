@@ -1,37 +1,21 @@
 package com.example.keyper;
 
-import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,17 +51,52 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Affichage de la liste
-        majList();
+        majList("");
+
+        TextView seachBar = findViewById(R.id.search);
+        if(seachBar != null)
+            seachBar.addTextChangedListener(new TextWatcher() {
+
+
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //Récuperation de la liste
+                ListView passwordList = findViewById(R.id.passwordList);
+
+                //Création du tableau pour la liste
+                ArrayList tabPwd = db.listPasswordUser(MainActivity.userLogID, editable.toString());
+
+                //Création de l'adapter personnalisé
+                AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
+
+                //Ajout de l'adapter
+                passwordList.setAdapter(adapter);
+                for (int i = 0; i < passwordList.getChildCount(); i++) {
+                    passwordList.getChildAt(i).setTag(new Boolean(false));
+                }
+            }
+        });
 
     }
 
     //Afficher la liste
-    public void majList() {
+    public void majList(String search) {
         //Récuperation de la liste
         ListView passwordList = (ListView) findViewById(R.id.passwordList);
 
         //Création du tableau pour la liste
-        ArrayList tabPwd = db.tabPasswordUser(MainActivity.userLogID);
+        ArrayList tabPwd = db.listPasswordUser(MainActivity.userLogID, search);
 
         //Création de l'adapter personnalisé
         AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
@@ -128,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
                 db.removePassword(this.getSelectedId());
                 Toast.makeText(MainActivity.this, R.string.toastRemove, Toast.LENGTH_SHORT).show();
-                this.majList();
+                this.majList("");
                 this.hideMenuItem();
                 return true;
 
