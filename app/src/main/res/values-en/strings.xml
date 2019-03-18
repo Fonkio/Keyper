@@ -6,6 +6,7 @@
     <string name="app_credits">App created by SELLÉ-FABRE Inc.\nAll rights reserved.</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
+    <string name="sign_up_prompt">Sign up successful</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="disconnect_prompt">You have been successfully disconnected</string>

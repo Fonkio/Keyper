@@ -64,7 +64,7 @@ public class SignInActivity extends AppCompatActivity {
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
             //Toast de confirmation
-            Toast.makeText(SignInActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInActivity.this, R.string.sign_up_prompt, Toast.LENGTH_SHORT).show();
             //On remplis les champs avec l'id et le mdp du nouvel inscrit
             TextView login = (TextView)findViewById(R.id.loginUsername);
             TextView password = (TextView)findViewById(R.id.loginPassword);
