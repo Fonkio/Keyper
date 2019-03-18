@@ -1,10 +1,8 @@
 package com.example.keyper;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -107,7 +105,7 @@ public class AdapterPassword extends ArrayAdapter<Password> {
                     //Ajout dans le presse-papiers
                     String label = "List";
                     String password = this.db.getPasswordFromId(passwordContentId);
-                    Toast.makeText(getContext(), R.string.clipBoardCopy, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.clipboard_copy, Toast.LENGTH_SHORT).show();
                     ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText(label, password);
                     clipboard.setPrimaryClip(clip);

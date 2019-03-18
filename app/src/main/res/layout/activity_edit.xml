@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModifyActivity">
+    tools:context=".EditActivity">
 
     <TextView
         android:id="@+id/textView2"
@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/editPassword"
+        android:text="@string/edit_title"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -26,11 +26,8 @@
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/titleHint"
+            android:hint="@string/password_title_hint"
             android:inputType="textPersonName" />
 
         <RadioGroup
@@ -54,18 +51,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Caractères spéciaux ?"
+                android:text="@string/special_characters"
                 android:textSize="18sp" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Oui" />
+                android:text="@string/yes" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Non" />
+                android:text="@string/no" />
 
         </RadioGroup>
 
@@ -80,16 +77,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:ems="10"
-                android:hint="@string/charNumber"
+                android:hint="@string/password_length"
                 android:inputType="numberDecimal" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/add_button_regen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:background="@android:color/transparent"
                 android:onClick="onClickButtonRegen"
-                android:text="@string/regen" />
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/validate" />
         </LinearLayout>
 
         <EditText
@@ -98,7 +97,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:enabled="false"
-            android:hint="Mot de passe"
+            android:hint="@string/password_hint"
             android:inputType="textPersonName" />
 
         <LinearLayout
@@ -112,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClickButtonValidate"
-                android:text="Valider" />
+                android:text="@string/validate_button" />
 
             <Button
                 android:id="@+id/buttonCancel"
@@ -120,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="onClickButtonCancel"
-                android:text="@string/cancelButton" />
+                android:text="@string/cancel_button" />
         </LinearLayout>
 
     </LinearLayout>

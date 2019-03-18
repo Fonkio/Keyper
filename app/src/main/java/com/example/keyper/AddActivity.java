@@ -34,7 +34,7 @@ public class AddActivity extends AppCompatActivity {
     private String generatePassword(int nbChar) {
         boolean specials;
         RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
-        if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals("Oui"))
+        if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals(getString(R.string.yes)))
             specials = true;
         else
             specials = false;

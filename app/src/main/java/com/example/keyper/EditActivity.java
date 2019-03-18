@@ -12,15 +12,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class ModifyActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
 
-    private Users db = new Users(ModifyActivity.this);
+    private Users db = new Users(EditActivity.this);
     private int idPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modify);
+        setContentView(R.layout.activity_edit);
         RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
         RadioButton specials = (RadioButton)specialsGroup.getChildAt(1);
         specials.setChecked(true);
@@ -42,7 +42,7 @@ public class ModifyActivity extends AppCompatActivity {
     private String regeneratePassword(int nbChar) {
         boolean specials;
         RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
-        if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals("Oui"))
+        if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals(getString(R.string.yes)))
             specials = true;
         else
             specials = false;
@@ -73,13 +73,13 @@ public class ModifyActivity extends AppCompatActivity {
         EditText titleField = findViewById(R.id.password_title_field);
         this.db.modifyPassword(generatedPasswordField.getText().toString(), titleField.getText().toString(), this.idPassword);
 
-        Intent intent = new Intent(ModifyActivity.this, MainActivity.class);
+        Intent intent = new Intent(EditActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
     public void onClickButtonCancel(View v) {
-        Intent intent = new Intent(ModifyActivity.this, MainActivity.class);
+        Intent intent = new Intent(EditActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

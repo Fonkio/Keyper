@@ -3,15 +3,14 @@ package com.example.keyper;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-    private Users db = new Users(LoginActivity.this);
+    private Users db = new Users(SignInActivity.this);
     private static final String TAG = "KeyperLogin";
 
     @Override
@@ -31,28 +30,28 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordField.getText().toString();
 
         if(username.equals("")) { //Si login vide
-            usernameField.setError(getString(R.string.loginMissing));
+            usernameField.setError(getString(R.string.username_missing));
         } else if (password.equals("")) { //Si mot de passe vide
-            passwordField.setError(getString(R.string.passwordMissing));
+            passwordField.setError(getString(R.string.password_missing));
         }
         else if(!db.isSignedUp(username)) { //Si login introuvabe en db
-            usernameField.setError(getString(R.string.incorrectLogin));
+            usernameField.setError(getString(R.string.incorrect_username));
         }
         else if(!db.checkPassword(username, password)){ //Si mauvais mot de passe
-            passwordField.setError(getString(R.string.incorrectPassword));
+            passwordField.setError(getString(R.string.incorrect_password));
         }
         else { //Tout est bon, connexion
             //Enregistrement de l'id de l'utilisateur
             MainActivity.setUserLogID(db.getId(username));
             //Lancement du MainActivity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             startActivity(intent);
         }
     }
 
     //Clic sur s'inscrire
     public void onClickSignUp(View v) {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
         startActivityForResult(intent,1); //Attente d'un résultat
     }
 
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
             //Toast de confirmation
-            Toast.makeText(LoginActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInActivity.this, "Vous vous êtes bien inscrit.", Toast.LENGTH_SHORT).show();
             //On remplis les champs avec l'id et le mdp du nouvel inscrit
             TextView login = (TextView)findViewById(R.id.loginUsername);
             TextView password = (TextView)findViewById(R.id.loginPassword);

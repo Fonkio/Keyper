@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Keyper</string>
+    <string name="menu_disconnect_button">Disconnect</string>
+    <string name="menu_credits_button">Credits</string>
+    <string name="app_credits">App created by SELLÉ-FABRE Inc.\nAll rights reserved.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="disconnect_prompt">You have been successfully disconnected</string>
+    <string name="password_length">Password length</string>
+    <string name="add_click_ok">onClickButtonOk</string>
+    <string name="clipboard_copy">Password successfully copied to the clipboard</string>
+    <string name="password_title_hint">Title</string>
+    <string name="password_confirm_hint">Re-enter password</string>
+    <string name="validate_button">Validate</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="passwords_not_matching">Passwords don\'t match</string>
+    <string name="password_missing">Please enter your password</string>
+    <string name="password_confirm_missing">Please confirm your password</string>
+    <string name="username_missing">Please enter your username</string>
+    <string name="username_already_exists">Username already exists</string>
+    <string name="incorrect_username">You are not signed up | Incorrect username</string>
+    <string name="incorrect_password">Incorrect password</string>
+    <string name="add_title">Add a password</string>
+    <string name="delete_prompt">Password successfully deleted</string>
+    <string name="regen">Regen</string>
+    <string name="edit_title">Edit a password</string>
+    <string name="search">Search</string>
+    <string name="delete_dialog_title">Deleting</string>
+    <string name="delete_dialog_text">Do you really want to delete this password?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="special_characters">Special characters?</string>
+</resources>

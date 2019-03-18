@@ -1,5 +1,7 @@
 package com.example.keyper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Recupération du +
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+
         //Clic sur le +
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,61 +54,66 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Affichage de la liste
-        majList("");
+        updateList("");
 
-        TextView seachBar = findViewById(R.id.search);
-        if(seachBar != null)
-            seachBar.addTextChangedListener(new TextWatcher() {
+        //Recupération de la barre de recherche (mode paysage)
+        TextView searchBar = findViewById(R.id.search);
 
+        //Test si le téléphone est en mode paysage (si il ne l'est pas, la search bar n'existe pas et est donc à null)
+        if(searchBar != null) {
 
+            searchBar.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                //Récuperation de la liste
-                ListView passwordList = findViewById(R.id.passwordList);
-
-                //Création du tableau pour la liste
-                ArrayList tabPwd = db.listPasswordUser(MainActivity.userLogID, editable.toString());
-
-                //Création de l'adapter personnalisé
-                AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
-
-                //Ajout de l'adapter
-                passwordList.setAdapter(adapter);
-                for (int i = 0; i < passwordList.getChildCount(); i++) {
-                    passwordList.getChildAt(i).setTag(new Boolean(false));
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 }
-            }
-        });
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                }
+
+                //Même code que le méthode "updateList" de MainAcitivity, mais impossible de l'utiliser dans une classe anonyme
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    //Récuperation de la liste
+                    ListView passwordListView = findViewById(R.id.passwordList);
+
+                    //Création du tableau pour la liste
+                    ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, editable.toString());
+
+                    //Création de l'adapter personnalisé
+                    AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);
+
+                    //Ajout de l'adapter
+                    passwordListView.setAdapter(adapter);
+
+                    //Mise en place du tag de selection pour chaque items de la liste
+                    for (int i = 0; i < passwordListView.getChildCount(); i++) {
+                        passwordListView.getChildAt(i).setTag(new Boolean(false));
+                    }
+                }
+            });
+        }
 
     }
 
-    //Afficher la liste
-    public void majList(String search) {
+    //MàJ de la ListView
+    public void updateList(String search) {
         //Récuperation de la liste
-        ListView passwordList = (ListView) findViewById(R.id.passwordList);
+        ListView passwordListView = (ListView) findViewById(R.id.passwordList);
 
         //Création du tableau pour la liste
-        ArrayList tabPwd = db.listPasswordUser(MainActivity.userLogID, search);
+        ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, search);
 
         //Création de l'adapter personnalisé
-        AdapterPassword adapter = new AdapterPassword(MainActivity.this,tabPwd);
+        AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);
 
         //Ajout de l'adapter
-        passwordList.setAdapter(adapter);
-        for (int i = 0; i < passwordList.getChildCount(); i++) {
-            passwordList.getChildAt(i).setTag(new Boolean(false));
-            ((TextView)((LinearLayout)((LinearLayout)passwordList.getChildAt(i)).getChildAt(0)).getChildAt(1)).setMovementMethod(new ScrollingMovementMethod());
+        passwordListView.setAdapter(adapter);
+
+        //Mise en place du tag de selection pour chaque items de la liste
+        for (int i = 0; i < passwordListView.getChildCount(); i++) {
+            passwordListView.getChildAt(i).setTag(new Boolean(false));
         }
     }
 
@@ -125,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.menu_disconnect:
-                Toast.makeText(MainActivity.this, R.string.toastDisconnect, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.disconnect_prompt, Toast.LENGTH_SHORT).show();
                 //Retour sur l'écran de connexion
                 this.disconnectChangeActivity();
                 return true;
@@ -135,26 +142,66 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_delete:
-
-                /*new AlertDialog.Builder(this)
-                        .setTitle("Suppression")
-                        .setMessage("Voulez vous vraiment supprimer ce mot de passe ?")
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.delete_dialog_title)
+                        .setMessage(R.string.delete_dialog_text)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast.makeText(MainActivity.this, "Supprimé", Toast.LENGTH_SHORT).show();
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();*/
+                                db.removePassword(this.getSelectedId());
+                                Toast.makeText(MainActivity.this, R.string.delete_prompt, Toast.LENGTH_SHORT).show();
+                                this.updateList("");
+                                MainActivity.hideMenuItem();
+                            }
 
-                db.removePassword(this.getSelectedId());
-                Toast.makeText(MainActivity.this, R.string.toastRemove, Toast.LENGTH_SHORT).show();
-                this.majList("");
-                this.hideMenuItem();
+
+                            //Ici je reprend les deux méthodes de MainActivity car je ne peux pas les utiliser dans une classe anonyme
+                            public void updateList(String search) {
+                                //Récuperation de la liste
+                                ListView passwordListView = (ListView) findViewById(R.id.passwordList);
+
+                                //Création du tableau pour la liste
+                                ArrayList passwordList = db.listPasswordUser(MainActivity.userLogID, search);
+
+                                //Création de l'adapter personnalisé
+                                AdapterPassword adapter = new AdapterPassword(MainActivity.this, passwordList);
+
+                                //Ajout de l'adapter
+                                passwordListView.setAdapter(adapter);
+
+                                //Mise en place du tag de selection pour chaque items de la liste
+                                for (int i = 0; i < passwordListView.getChildCount(); i++) {
+                                    passwordListView.getChildAt(i).setTag(new Boolean(false));
+                                }
+                            }
+
+                            public int getSelectedId() {
+                                //Recupération de la liste
+                                ListView passwordListView = findViewById(R.id.passwordList);
+
+                                //Parcours de la liste pour trouver l'élément selectionné
+                                for(int i = 0; i < passwordListView.getChildCount(); i++) {
+                                    LinearLayout passwordListItem = (LinearLayout)passwordListView.getChildAt(i); //Récup de l'item
+
+                                    Boolean selected = (Boolean) passwordListItem.getTag();
+
+                                    if(selected) {
+                                        LinearLayout tvPassword = (LinearLayout) passwordListItem.getChildAt(0);
+                                        TextView tvContent = (TextView) tvPassword.getChildAt(1);
+                                        return (int)tvContent.getTag();
+                                    }
+                                }
+                                return -1;
+                            }
+                        })
+
+                        .setNegativeButton(R.string.no, null).show();
+
                 return true;
 
             case R.id.menu_edit:
-                Intent intent = new Intent(MainActivity.this, ModifyActivity.class);
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
                 intent.putExtra("id",this.getSelectedId());
                 startActivity(intent);
                 return true;
@@ -166,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Renvoie sur l'activité de login
     public void disconnectChangeActivity() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
         finish();
     }

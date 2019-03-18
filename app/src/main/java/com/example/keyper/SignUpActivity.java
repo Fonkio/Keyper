@@ -33,19 +33,19 @@ public class SignUpActivity extends AppCompatActivity {
         EditText passwordConfirmField = (EditText) findViewById(R.id.signUpConfirmPwd);
 
         if(usernameField.getText().toString().equals("")) {
-            usernameField.setError("Veuillez renseigner un identifiant!");
+            usernameField.setError(getString(R.string.username_missing));
         }
         else if (passwordField.getText().toString().equals("")){
-            passwordField.setError("Veuillez renseigner un mot de passe!");
+            passwordField.setError(getString(R.string.password_missing));
         }
         else if (passwordConfirmField.getText().toString().equals("")) {
-            passwordConfirmField.setError("Veuillez confirmer votre mot de passe!");
+            passwordConfirmField.setError(getString(R.string.password_confirm_missing));
         }
         else if (!passwordField.getText().toString().equals(passwordConfirmField.getText().toString())) {
-            passwordConfirmField.setError("Les mots de passe de correspondent pas!");
+            passwordConfirmField.setError(getString(R.string.passwords_not_matching));
         }
         else if (this.db.isSignedUp(usernameField.getText().toString())) {
-            usernameField.setError("Cet identifiant existe déjà!");
+            usernameField.setError(getString(R.string.username_already_exists));
         }
         else {
             //Alors on inscrit l'utilisateur dans la db
