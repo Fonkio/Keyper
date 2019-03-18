@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         passwordList.setAdapter(adapter);
         for (int i = 0; i < passwordList.getChildCount(); i++) {
             passwordList.getChildAt(i).setTag(new Boolean(false));
+            ((TextView)((LinearLayout)((LinearLayout)passwordList.getChildAt(i)).getChildAt(0)).getChildAt(1)).setMovementMethod(new ScrollingMovementMethod());
         }
     }
 
