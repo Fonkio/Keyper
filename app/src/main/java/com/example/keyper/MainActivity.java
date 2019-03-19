@@ -216,33 +216,30 @@ public class MainActivity extends AppCompatActivity {
         finish(); //Pour ne pas faire de retour
     }
 
-    public void onClickVisibilityButton(View v) {
+    public void onClickVisibilityButton(View view) {
 
         //On récupère le bouton image
-        AppCompatImageButton lin = (AppCompatImageButton) v;
+        AppCompatImageButton passwordVisibilityButton = (AppCompatImageButton) view;
         //On récupère le LinearLayout horizontal
-        LinearLayout plin = (LinearLayout)lin.getParent();
+        LinearLayout passwordItemLayout = (LinearLayout)passwordVisibilityButton.getParent();
         //Puis le LinearLayout vertical à l'interieur du précédent
-        LinearLayout cplin = (LinearLayout) plin.getChildAt(0);
-        //On peut donc accéder aux 2 TextView
-        TextView passwdField = ((TextView) cplin.getChildAt(1));
-        TextView titleField = (TextView) cplin.getChildAt(0);
-        //On peut récupérer le titre
-        String title = titleField.getText().toString();
-        //Et le mot de passe
-        String passwd = passwdField.getText().toString();
+        LinearLayout passwordDataLayout = (LinearLayout) passwordItemLayout.getChildAt(0);
+        //On peut donc accéder aux TextView
+        TextView passwordContentView = ((TextView) passwordDataLayout.getChildAt(1));
+        //Acces au contenu du MdP
+        String passwordContent = passwordContentView.getText().toString();
 
-        if (passwd.charAt(0) == '•') { //Si le mot de passe est caché
+        if (passwordContent.charAt(0) == '•') { //Si le mot de passe est caché
             //Affichage du mot de passe
-            String notHidden = this.db.getPasswordFromId((int)passwdField.getTag());
-            passwdField.setText(notHidden);
+            String notHidden = this.db.getPasswordFromId((int)passwordContentView.getTag());
+            passwordContentView.setText(notHidden);
         } else { //Si le mot de passe est visible
             //Chacher le mot de passe
-            passwdField.setText(MainActivity.hidePassword(passwd.length()));
+            passwordContentView.setText(MainActivity.hidePassword(passwordContent.length()));
         }
     }
 
-    //Cache le mot de passe
+    //Cacher le mot de passe
     public static String hidePassword(int length) {
         String hiddenPassword = "";
         for (int i = 0; i < length; i++) {
@@ -258,9 +255,9 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < listPassword.getChildCount(); i++) {
             LinearLayout passwordItem = (LinearLayout)listPassword.getChildAt(i); //Récup de l'item
 
-            Boolean sel = (Boolean) passwordItem.getTag(); //Recup du tag qui indique si l'item est sélectionné
+            Boolean isSelected = (Boolean) passwordItem.getTag(); //Recup du tag qui indique si l'item est sélectionné
 
-            if(sel) {
+            if(isSelected) {
                 LinearLayout tvPassword = (LinearLayout) passwordItem.getChildAt(0);
                 TextView tvContent = (TextView) tvPassword.getChildAt(1);
                 return (int)tvContent.getTag();

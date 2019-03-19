@@ -43,29 +43,29 @@ public class AddActivity extends AppCompatActivity {
             specials = true; //On set le booleen à true
         else
             specials = false; //Sinon on le set a false
-        Generator gen = new Generator(specials);//On créé le générateur de MdP en fonction du boolean
-        return gen.createPassword(nbChar); //On retourne le MdP généré en fonction de la longueur souhaitée
+        Generator generator = new Generator(specials);//On créé le générateur de MdP en fonction du boolean
+        return generator.createPassword(nbChar); //On retourne le MdP généré en fonction de la longueur souhaitée
 
     }
 
     //Sur le click du ButtonImage de génération du MdP
     public void onClickButtonOk(View v) {
         //Recupération des champs et du bouton de validation
-        EditText charNumberField = findViewById(R.id.password_length_field);
+        EditText passwordLengthField = findViewById(R.id.password_length_field);
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
-        Button validate = findViewById(R.id.button_validate);
+        Button validateButton = findViewById(R.id.button_validate);
 
         //Si le champ de la longueur du MdP est rempli
-        if(!charNumberField.getText().toString().equals("")) {
-            int nbChar = Integer.parseInt(charNumberField.getText().toString());//On recupère le nombre de chars souhaité
+        if(!passwordLengthField.getText().toString().equals("")) {
+            int passwordLength = Integer.parseInt(passwordLengthField.getText().toString());//On recupère le nombre de chars souhaité
 
             //Active le bouton valider si la longueur du MdP est > 0
-            if (nbChar > 0) {
-                validate.setEnabled(true);
+            if (passwordLength > 0) {
+                validateButton.setEnabled(true);
             } else {
-                validate.setEnabled(false);
+                validateButton.setEnabled(false);
             }
-            generatedPasswordField.setText(this.generatePassword(nbChar)); //On génère un MdP dans le champ destiné au MdP
+            generatedPasswordField.setText(this.generatePassword(passwordLength)); //On génère un MdP dans le champ destiné au MdP
         }
     }
 
@@ -73,9 +73,9 @@ public class AddActivity extends AppCompatActivity {
     public void onClickButtonValidate(View v) {
         //Recupération des champs
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
-        EditText titleField = findViewById(R.id.password_title_field);
+        EditText passwordTitleField = findViewById(R.id.password_title_field);
         //On ajoute le Mdp à la BDD
-        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userID, titleField.getText().toString() );
+        this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userID, passwordTitleField.getText().toString() );
 
         //On change d'activité (vers MainActivity)
         Intent intent = new Intent(AddActivity.this, MainActivity.class);

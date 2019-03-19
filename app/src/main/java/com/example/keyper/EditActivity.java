@@ -30,10 +30,10 @@ public class EditActivity extends AppCompatActivity {
         //Recupération de l'id du mot de passe pour modification
         this.idPassword = getIntent().getIntExtra("id",0);
         //Recup du contenu
-        TextView title = findViewById(R.id.password_title_field);
-        title.setText(db.getTitleFromId(this.idPassword));
-        TextView content = findViewById(R.id.generated_password_field);
-        content.setText(db.getPasswordFromId(this.idPassword));
+        EditText passwordTitleField = findViewById(R.id.password_title_field);
+        passwordTitleField.setText(db.getTitleFromId(this.idPassword));
+        EditText generatedPasswordField = findViewById(R.id.generated_password_field);
+        generatedPasswordField.setText(db.getPasswordFromId(this.idPassword));
     }
     @Override //Création du menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,29 +57,29 @@ public class EditActivity extends AppCompatActivity {
 
     //Code du bouton de generation du mot de passe
     public void onClickButtonRegen(View v) {
-        EditText charNumberField = findViewById(R.id.password_length_field);
+        EditText passwordlengthField = findViewById(R.id.password_length_field);
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
-        Button validate = findViewById(R.id.button_validate);
+        Button validateButton = findViewById(R.id.button_validate);
 
-        if(!charNumberField.getText().toString().equals("")) {
-            int nbChar = Integer.parseInt(charNumberField.getText().toString());
+        if(!passwordlengthField.getText().toString().equals("")) {
+            int passwordLength = Integer.parseInt(passwordlengthField.getText().toString());
 
             //Active le bouton valider si le mot de passe est > 0
-            if (nbChar > 0) {
-                validate.setEnabled(true);
+            if (passwordLength > 0) {
+                validateButton.setEnabled(true);
             } else {
-                validate.setEnabled(false);
+                validateButton.setEnabled(false);
             }
-            generatedPasswordField.setText(this.regeneratePassword(nbChar));
+            generatedPasswordField.setText(this.regeneratePassword(passwordLength));
         }
     }
     //Enregistrement du nouveau mot de passe
     public void onClickButtonValidate(View v) {
         //Recup des TextViews
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
-        EditText titleField = findViewById(R.id.password_title_field);
+        EditText passwordTitleField = findViewById(R.id.password_title_field);
         //Modif en base de données
-        this.db.modifyPassword(generatedPasswordField.getText().toString(), titleField.getText().toString(), this.idPassword);
+        this.db.modifyPassword(generatedPasswordField.getText().toString(), passwordTitleField.getText().toString(), this.idPassword);
         //retour sur le main activity
         Intent intent = new Intent(EditActivity.this, MainActivity.class);
         startActivity(intent);

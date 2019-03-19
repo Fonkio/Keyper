@@ -60,15 +60,15 @@ public class SignInActivity extends AppCompatActivity {
 
         if(requestCode==1 && !(data.getStringExtra("login") == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
             //Récuperation des valeurs passées
-            String valLog = data.getStringExtra("login");
-            String valPwd = data.getStringExtra("password");
+            String usernameValue = data.getStringExtra("login");
+            String passwordValue = data.getStringExtra("password");
             //Toast de confirmation
             Toast.makeText(SignInActivity.this, R.string.sign_up_prompt, Toast.LENGTH_SHORT).show();
             //On remplit les champs avec l'id et le mdp du nouvel inscrit
-            TextView login = findViewById(R.id.loginUsername);
-            TextView password = findViewById(R.id.loginPassword);
-            login.setText(valLog);
-            password.setText(valPwd);
+            TextView usernametextView = findViewById(R.id.loginUsername);
+            TextView passwordTextView = findViewById(R.id.loginPassword);
+            usernametextView.setText(usernameValue);
+            passwordTextView.setText(passwordValue);
         }
     }
 }
