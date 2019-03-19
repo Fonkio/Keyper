@@ -43,8 +43,8 @@ public class AddActivity extends AppCompatActivity {
             specials = true; //On set le booleen à true
         else
             specials = false; //Sinon on le set a false
-        Generator gen = new Generator(specials);//On genere le MdP en fonction du boolean
-        return gen.createPassword(nbChar);
+        Generator gen = new Generator(specials);//On créé le générateur de MdP en fonction du boolean
+        return gen.createPassword(nbChar); //On retourne le MdP généré en fonction de la longueur souhaitée
 
     }
 
