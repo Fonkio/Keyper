@@ -48,35 +48,44 @@ public class AddActivity extends AppCompatActivity {
 
     }
 
+    //Sur le click du ButtonImage de génération du MdP
     public void onClickButtonOk(View v) {
+        //Recupération des champs et du bouton de validation
         EditText charNumberField = findViewById(R.id.password_length_field);
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
         Button validate = findViewById(R.id.button_validate);
 
+        //Si le champ de la longueur du MdP est rempli
         if(!charNumberField.getText().toString().equals("")) {
-            int nbChar = Integer.parseInt(charNumberField.getText().toString());
+            int nbChar = Integer.parseInt(charNumberField.getText().toString());//On recupère le nombre de chars souhaité
 
-            //Active le bouton valider si le mot de passe est > 0
+            //Active le bouton valider si la longueur du MdP est > 0
             if (nbChar > 0) {
                 validate.setEnabled(true);
             } else {
                 validate.setEnabled(false);
             }
-            generatedPasswordField.setText(this.generatePassword(nbChar));
+            generatedPasswordField.setText(this.generatePassword(nbChar)); //On génère un MdP dans le champ destiné au MdP
         }
     }
 
+    //Sur le click du bouton de validation
     public void onClickButtonValidate(View v) {
+        //Recupération des champs
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
         EditText titleField = findViewById(R.id.password_title_field);
+        //On ajoute le Mdp à la BDD
         this.db.addPassword(generatedPasswordField.getText().toString(), MainActivity.userID, titleField.getText().toString() );
 
+        //On change d'activité (vers MainActivity)
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
+    //Sur le click du bouton d'Annulation
     public void onClickButtonCancel(View v) {
+        //On change d'activité (vers MainActivity)
         Intent intent = new Intent(AddActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
