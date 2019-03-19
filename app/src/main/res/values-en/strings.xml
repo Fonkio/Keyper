@@ -32,4 +32,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="special_characters">Special characters?</string>
+    <string name="password_too_long">A password can\'t exceed 50 characters</string>
 </resources>

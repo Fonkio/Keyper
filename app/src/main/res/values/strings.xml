@@ -30,5 +30,6 @@
     <string name="delete_dialog_text">Êtes-vous sûr de vouloir supprimer ce mot de passe ?</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
+    <string name="password_too_long">Un mot de passe de doit pas faire plus de 50 caractères</string>
     <string name="special_characters">Caractères spéciaux ?</string>
 </resources>

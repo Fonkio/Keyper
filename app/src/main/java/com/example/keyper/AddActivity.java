@@ -58,14 +58,17 @@ public class AddActivity extends AppCompatActivity {
         //Si le champ de la longueur du MdP est rempli
         if(!passwordLengthField.getText().toString().equals("")) {
             int passwordLength = Integer.parseInt(passwordLengthField.getText().toString());//On recupère le nombre de chars souhaité
-
-            //Active le bouton valider si la longueur du MdP est > 0
-            if (passwordLength > 0) {
-                validateButton.setEnabled(true);
-            } else {
-                validateButton.setEnabled(false);
+            validateButton.setEnabled(false);
+            if(passwordLength > 50) {
+                passwordLengthField.setError(getString(R.string.password_too_long));
             }
-            generatedPasswordField.setText(this.generatePassword(passwordLength)); //On génère un MdP dans le champ destiné au MdP
+            else {
+                //Active le bouton valider si la longueur du MdP est > 0
+                if (passwordLength > 0) {
+                    validateButton.setEnabled(true);
+                }
+                generatedPasswordField.setText(this.generatePassword(passwordLength)); //On génère un MdP dans le champ destiné au MdP
+            }
         }
     }
 
