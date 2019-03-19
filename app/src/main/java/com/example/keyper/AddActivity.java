@@ -13,32 +13,37 @@ import android.widget.RadioGroup;
 
 public class AddActivity extends AppCompatActivity {
 
+    //Création de la BDD
     private Users db = new Users(AddActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
+        setContentView(R.layout.activity_add); //Association du layout activity_add
+        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup); //Recupération du radioGroup
+        //Recupération du radioButton "Oui/Yes" du radiogroup
         RadioButton specials = (RadioButton)specialsGroup.getChildAt(1);
+        //On met selectionne de base le radioButton "Oui/yes" du radioGroup
         specials.setChecked(true);
     }
 
-    @Override
+    @Override //Creation du menu
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = this.getMenuInflater();
         inflater.inflate(R.menu.app_menu, menu);
         return true;
     }
 
+    //Méthode de génération d'un MdP
     private String generatePassword(int nbChar) {
-        boolean specials;
-        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup);
+        boolean specials; //Variable pour l'utilisation des caratères spéciaux ou non.
+        RadioGroup specialsGroup = findViewById(R.id.specials_radiogroup); //Recupération du radioGroup
+        //Si le radioButton "Oui/Yes" est séléctionné
         if(((RadioButton)findViewById(specialsGroup.getCheckedRadioButtonId())).getText().equals(getString(R.string.yes)))
-            specials = true;
+            specials = true; //On set le booleen à true
         else
-            specials = false;
-        Generator gen = new Generator(specials);
+            specials = false; //Sinon on le set a false
+        Generator gen = new Generator(specials);//On genere le MdP en fonction du boolean
         return gen.createPassword(nbChar);
 
     }

@@ -15,10 +15,8 @@ import java.util.ArrayList;
 
 public class AdapterPassword extends ArrayAdapter<Password> {
 
-
-
-    private static boolean longClick = false;
-
+    //Booleen permettant de savoir si un item de la liste est longclick
+    private static boolean isLongClicked = false;
 
     public AdapterPassword(Context context, ArrayList<Password> pwd) {
         super(context, 0, pwd);
@@ -26,36 +24,36 @@ public class AdapterPassword extends ArrayAdapter<Password> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
+
+        //Recupération des données de l'item à la positions donnée
         Password password = getItem(position);
 
-        // Check if an existing view is being reused, otherwise inflate the view
+        //Si le l'item est créé (il n'existe pas déjà), alors on inflate la liste
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_list, parent, false);
         }
 
+        //Pour pouvoir utiliser convertView dans la classe anonyme
         final View finalConvertView = convertView;
 
-        // Lookup view for data population
+        //Recupération des éléments qui composent l'item de la liste
+        LinearLayout passwordItem = finalConvertView.findViewById(R.id.passwd_item_layout);
         TextView passwordTitle = finalConvertView.findViewById(R.id.title);
         TextView passwordContent = finalConvertView.findViewById(R.id.content);
 
-        LinearLayout passwordItem = finalConvertView.findViewById(R.id.passwd_item_layout);
-
-
-        //Long Click
+        //Méthode si longclick sur un item
         passwordItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
 
-                //Pour ne pas faire un click normal
-                AdapterPassword.setLongClick(true);
+                //On passe le booleen "isLongClicked" a true pour empecher le déroulement de la méthode de click simple
+                AdapterPassword.setIsLongClicked(true);
 
                 LinearLayout passwordItem = (LinearLayout)view.getParent(); //Recuperation de l'élément de la liste cliqué
 
                 ListView passwordList = (ListView)passwordItem.getParent(); //Recuperation de la list complète
 
-                //Set all password item's background color to white
+                //On met tous les background des items en blanc et on leur associe un tag a false (pour savoir s'ils sont longClicked)
                 for (int i = 0; i < passwordList.getChildCount(); i++) {
                     passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                     passwordList.getChildAt(i).setTag(new Boolean(false));
@@ -63,43 +61,46 @@ public class AdapterPassword extends ArrayAdapter<Password> {
 
 
 
-                //Set selected password item's background color to blue
+                //On met le background de l'item selectionné en bleu
                 passwordItem.setBackgroundColor(finalConvertView.getResources().getColor(R.color.selected));
 
+                //On met sont tag en true (il est longClicked)
                 passwordItem.setTag(new Boolean(true));
 
+                //On affiche les icons de modification ou suppression de l'item
                 MainActivity.showMenuItem();
-
 
                 return false;
             }
         });
 
-        //Click
+        //Méthode si simple click sur un item
         passwordItem.setOnClickListener(new View.OnClickListener() {
 
-            private Users db = new Users(getContext()); //Base de données
+            private Users db = new Users(getContext()); //Recupération de la BDD
 
             @Override
             public void onClick(View view) {
 
-                if (AdapterPassword.isLongClick()) {//Si il y a eu un long clic
-                    AdapterPassword.setLongClick(false);
+                //Si il y a eu un longClick
+                if (AdapterPassword.isLongClicked()) {
+                    AdapterPassword.setIsLongClicked(false); //On met le booleen isLongClicked a false
                 }//Si il n'y a pas eu de long clic
                 else {
                     LinearLayout passwordItem = (LinearLayout) view.getParent(); //Recup de l'item de la liste cliqué
 
                     ListView passwordList = (ListView) passwordItem.getParent(); //Recup de la liste complète
 
-                    //Set all password item's background color to white
+                    //On met tous les background des items en blanc et on leur associe un tag a false (pour savoir s'ils sont longClicked)
                     for (int i = 0; i < passwordList.getChildCount(); i++) {
                         passwordList.getChildAt(i).setBackgroundColor(finalConvertView.getResources().getColor(R.color.white));
                         passwordList.getChildAt(i).setTag(new Boolean(false));
                     }
 
+                    //On cache le menu de modification/supression de l'item, il n'apprait que lors d'un longClick
                     MainActivity.hideMenuItem();
 
-                    TextView passwordContent = (TextView)((LinearLayout)view).getChildAt(1); //Recuperation champ mot de passe
+                    TextView passwordContent = (TextView)((LinearLayout)view).getChildAt(1); //Recuperation du champ de mot de passe
                     int passwordContentId = (int)passwordContent.getTag(); //Recupération de l'id du mot de passe stocké dans le tag du champ
 
                     //Ajout dans le presse-papiers
@@ -109,23 +110,24 @@ public class AdapterPassword extends ArrayAdapter<Password> {
             }
         });
 
-        // Populate the data into the template view using the data object
+        //On met des les champs de l'item les donnees du mot de passe
         passwordTitle.setText(password.getTitle());
         passwordContent.setText(password.getContent());
         passwordContent.setTag(password.getId());
 
-        // Return the completed view to render on screen
+        //On retourne l'item a afficher dans la liste
         return convertView;
     }
 
-    public static void setLongClick(boolean longClick) {
-        AdapterPassword.longClick = longClick;
+    public static void setIsLongClicked(boolean isLongClicked) {
+        AdapterPassword.isLongClicked = isLongClicked;
     }
 
-    public static boolean isLongClick() {
-        return longClick;
+    public static boolean isLongClicked() {
+        return isLongClicked;
     }
 
+    //Méthode pour copier dans le presse papier
     public static void copyToClipboard(Context context, String password) {
         String label = "Password";
         Toast.makeText(context, R.string.clipboard_copy, Toast.LENGTH_SHORT).show();
