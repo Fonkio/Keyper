@@ -58,17 +58,19 @@ public class SignInActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
 
-        if(requestCode==1 && !(data.getStringExtra("login") == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
-            //Récuperation des valeurs passées
-            String usernameValue = data.getStringExtra("login");
-            String passwordValue = data.getStringExtra("password");
-            //Toast de confirmation
-            Toast.makeText(SignInActivity.this, R.string.sign_up_prompt, Toast.LENGTH_SHORT).show();
-            //On remplit les champs avec l'id et le mdp du nouvel inscrit
-            TextView usernametextView = findViewById(R.id.loginUsername);
-            TextView passwordTextView = findViewById(R.id.loginPassword);
-            usernametextView.setText(usernameValue);
-            passwordTextView.setText(passwordValue);
+        if(data != null) {
+            if (requestCode == 1 && !(data.getStringExtra("login") == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
+                //Récuperation des valeurs passées
+                String usernameValue = data.getStringExtra("login");
+                String passwordValue = data.getStringExtra("password");
+                //Toast de confirmation
+                Toast.makeText(SignInActivity.this, R.string.sign_up_prompt, Toast.LENGTH_SHORT).show();
+                //On remplit les champs avec l'id et le mdp du nouvel inscrit
+                TextView usernametextView = findViewById(R.id.loginUsername);
+                TextView passwordTextView = findViewById(R.id.loginPassword);
+                usernametextView.setText(usernameValue);
+                passwordTextView.setText(passwordValue);
+            }
         }
     }
 }
