@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             searchBar.addTextChangedListener(new TextWatcher() {
 
-                @Override
+                @Override //Methode inutilisées
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
                 @Override
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     //MàJ de la ListView
     public void updateList(String search) {
         //Récuperation de la liste
-        ListView passwordListView = (ListView) findViewById(R.id.passwordList);
+        ListView passwordListView = findViewById(R.id.passwordList);
 
         //Création du tableau pour la liste
         ArrayList passwordList = db.listPasswordUser(MainActivity.userID, search);
@@ -113,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Création du menu
-    @Override
+
+    @Override //Création du menu
     public boolean onCreateOptionsMenu(Menu menu) {
         MainActivity.menu = menu;
         MenuInflater inflater = this.getMenuInflater();
@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Traitement des évenements sur les items du menu
-    @Override
+
+    @Override //Traitement des évenements sur les items du menu
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.menu_delete:
+                //Affichage d'un dialogue de confirmation
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.delete_dialog_title)
                         .setMessage(R.string.delete_dialog_text)
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                             //Ici je reprend les deux méthodes de MainActivity car je ne peux pas les utiliser dans une classe anonyme
                             public void updateList(String search) {
                                 //Récuperation de la liste
-                                ListView passwordListView = (ListView) findViewById(R.id.passwordList);
+                                ListView passwordListView = findViewById(R.id.passwordList);
 
                                 //Création du tableau pour la liste
                                 ArrayList passwordList = db.listPasswordUser(MainActivity.userID, search);
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                                 for(int i = 0; i < passwordListView.getChildCount(); i++) {
                                     LinearLayout passwordListItem = (LinearLayout)passwordListView.getChildAt(i); //Récup de l'item
 
-                                    Boolean selected = (Boolean) passwordListItem.getTag();
+                                    Boolean selected = (Boolean) passwordListItem.getTag(); //Recup du tag qui indique si l'item est sélectionné
 
                                     if(selected) {
                                         LinearLayout tvPassword = (LinearLayout) passwordListItem.getChildAt(0);
@@ -211,7 +212,8 @@ public class MainActivity extends AppCompatActivity {
     public void disconnectChangeActivity() {
         Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
-        finish();
+        MainActivity.userID = 0;
+        finish(); //Pour ne pas faire de retour
     }
 
     public void onClickVisibilityButton(View v) {
@@ -256,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < listPassword.getChildCount(); i++) {
             LinearLayout passwordItem = (LinearLayout)listPassword.getChildAt(i); //Récup de l'item
 
-            Boolean sel = (Boolean) passwordItem.getTag();
+            Boolean sel = (Boolean) passwordItem.getTag(); //Recup du tag qui indique si l'item est sélectionné
 
             if(sel) {
                 LinearLayout tvPassword = (LinearLayout) passwordItem.getChildAt(0);

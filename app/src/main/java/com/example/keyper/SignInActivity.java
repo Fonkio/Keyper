@@ -11,7 +11,6 @@ import android.widget.Toast;
 public class SignInActivity extends AppCompatActivity {
 
     private Users db = new Users(SignInActivity.this);
-    private static final String TAG = "KeyperLogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,8 @@ public class SignInActivity extends AppCompatActivity {
     //Clic sur se connecter
     public void connectChangeActivity(View v) {
         //Recuperation des TextFields
-        EditText usernameField = (EditText)findViewById(R.id.loginUsername);
-        EditText passwordField = (EditText)findViewById(R.id.loginPassword);
+        EditText usernameField = findViewById(R.id.loginUsername);
+        EditText passwordField = findViewById(R.id.loginPassword);
         //Récupération des valeurs
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();
@@ -59,15 +58,15 @@ public class SignInActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
 
-        if(requestCode==1 && !(data == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
+        if(requestCode==1 && !(data.getStringExtra("login") == null)) { //Si un retour de l'activité SignUp non null (Pas de cancel)
             //Récuperation des valeurs passées
             String valLog = data.getStringExtra("login");
             String valPwd = data.getStringExtra("password");
             //Toast de confirmation
             Toast.makeText(SignInActivity.this, R.string.sign_up_prompt, Toast.LENGTH_SHORT).show();
-            //On remplis les champs avec l'id et le mdp du nouvel inscrit
-            TextView login = (TextView)findViewById(R.id.loginUsername);
-            TextView password = (TextView)findViewById(R.id.loginPassword);
+            //On remplit les champs avec l'id et le mdp du nouvel inscrit
+            TextView login = findViewById(R.id.loginUsername);
+            TextView password = findViewById(R.id.loginPassword);
             login.setText(valLog);
             password.setText(valPwd);
         }
