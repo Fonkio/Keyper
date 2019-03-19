@@ -11,7 +11,6 @@
     <string name="password_hint">Password</string>
     <string name="disconnect_prompt">You have been successfully disconnected</string>
     <string name="password_length">Password length</string>
-    <string name="add_click_ok">onClickButtonOk</string>
     <string name="clipboard_copy">Password successfully copied to the clipboard</string>
     <string name="password_title_hint">Title</string>
     <string name="password_confirm_hint">Re-enter password</string>
@@ -26,7 +25,6 @@
     <string name="incorrect_password">Incorrect password</string>
     <string name="add_title">Add a password</string>
     <string name="delete_prompt">Password successfully deleted</string>
-    <string name="regen">Regen</string>
     <string name="edit_title">Edit a password</string>
     <string name="search">Search</string>
     <string name="delete_dialog_title">Deleting</string>

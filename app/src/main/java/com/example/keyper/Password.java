@@ -1,5 +1,6 @@
 package com.example.keyper;
 
+//Classe utilisée pour générer un liste de mot de passe pour l'AdapterPassword
 public class Password {
 
     private String title;
@@ -18,6 +19,7 @@ public class Password {
         return id;
     }
 
+    //Constructeur
     public Password (String title, String content, int id) {
         this.title = title;
         this.content = content;

@@ -25,10 +25,10 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void onClickValidate(View view) {
 
-        //Get EditTexts
-        EditText usernameField = (EditText) findViewById(R.id.signUpLogin);
-        EditText passwordField = (EditText) findViewById(R.id.signUpPwd);
-        EditText passwordConfirmField = (EditText) findViewById(R.id.signUpConfirmPwd);
+        //Récup des EditTexts
+        EditText usernameField = findViewById(R.id.signUpLogin);
+        EditText passwordField = findViewById(R.id.signUpPwd);
+        EditText passwordConfirmField = findViewById(R.id.signUpConfirmPwd);
 
         if(usernameField.getText().toString().equals("")) {
             usernameField.setError(getString(R.string.username_missing));
