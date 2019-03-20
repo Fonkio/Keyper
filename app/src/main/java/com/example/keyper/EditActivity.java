@@ -52,25 +52,29 @@ public class EditActivity extends AppCompatActivity {
             specials = false;
         Generator gen = new Generator(specials);
         return gen.createPassword(nbChar);
-
     }
 
     //Code du bouton de generation du mot de passe
     public void onClickButtonRegen(View v) {
-        EditText passwordlengthField = findViewById(R.id.password_length_field);
+        //Recupération des champs et du bouton de validation
+        EditText passwordLengthField = findViewById(R.id.password_length_field);
         EditText generatedPasswordField = findViewById(R.id.generated_password_field);
         Button validateButton = findViewById(R.id.button_validate);
 
-        if(!passwordlengthField.getText().toString().equals("")) {
-            int passwordLength = Integer.parseInt(passwordlengthField.getText().toString());
-
-            //Active le bouton valider si le mot de passe est > 0
-            if (passwordLength > 0) {
-                validateButton.setEnabled(true);
-            } else {
-                validateButton.setEnabled(false);
+        //Si le champ de la longueur du MdP est rempli
+        if(!passwordLengthField.getText().toString().equals("")) {
+            int passwordLength = Integer.parseInt(passwordLengthField.getText().toString());//On recupère le nombre de chars souhaité
+            validateButton.setEnabled(false);
+            if(passwordLength > 50) {
+                passwordLengthField.setError(getString(R.string.password_too_long));
             }
-            generatedPasswordField.setText(this.regeneratePassword(passwordLength));
+            else {
+                //Active le bouton valider si la longueur du MdP est > 0
+                if (passwordLength > 0) {
+                    validateButton.setEnabled(true);
+                }
+                generatedPasswordField.setText(this.regeneratePassword(passwordLength)); //On génère un MdP dans le champ destiné au MdP
+            }
         }
     }
     //Enregistrement du nouveau mot de passe
